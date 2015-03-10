@@ -9,12 +9,13 @@ It's written in the [Crystal](http://crystal-lang.org/) language.
 
 ## Features
 
+* Fast
+* No dependencies, easy to install
+* Basic HTTP features (method, request body, headers)
 * Syntax highlighting of the output (currently, only JSON)
 
 ## Planned features
 
-* Headers
-* Request body
 * XML highlight
 * User friendly headers and request body generation (similar to
 [httpie's](https://github.com/jakubroztocil/httpie#request-items))
@@ -33,6 +34,8 @@ can build from sources, see [Development](#development).
 
     Usage: crul [options] URL
         -X METHOD, --method METHOD       Use GET|POST|PUT|DELETE (default: GET)
+        -d DATA, --data DATA             Request body
+        -H HEADER, --header HEADER       Set header
         -j, --json                       Format response as JSON
         -h, --help                       Show this help
 
@@ -47,6 +50,9 @@ After checking out the repo, run `make` to run the tests and compile the source.
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
 5. Create a new Pull Request
+
+You can also contribute by trying it and reporting any
+[issue](https://github.com/porras/crul/issues) you find.
 
 ## Copyright
 

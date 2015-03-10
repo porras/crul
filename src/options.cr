@@ -21,15 +21,15 @@ module Crul
           parser.on("-X METHOD", "--method METHOD", "Use GET|POST|PUT|DELETE (default: GET)") do |method|
             options.method = method
           end
-          parser.on("-j", "--json", "Format response as JSON") do |method|
-            options.formatter = Formatters::JSON
-          end
           parser.on("-d DATA", "--data DATA", "Request body") do |body|
             options.body = body
           end
           parser.on("-H HEADER", "--header HEADER", "Set header") do |header|
             name, value = header.split(":")
             options.headers[name] = value
+          end
+          parser.on("-j", "--json", "Format response as JSON") do |method|
+            options.formatter = Formatters::JSON
           end
           parser.on("-h", "--help", "Show this help") do
             puts parser
