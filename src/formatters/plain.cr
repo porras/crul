@@ -1,7 +1,9 @@
-module Formatters
-  class Plain
-    def print(body)
-      puts body
+module Crul
+  module Formatters
+    class Plain
+      def print(body)
+        puts body
+      end
     end
   end
 end

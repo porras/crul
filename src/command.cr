@@ -27,15 +27,7 @@ module Crul
         puts "#{name}: #{value}"
       end
       puts
-      formatter.print(response.body)
-    end
-
-    private def formatter
-      if @options.formatter
-        @options.formatter.not_nil!.new
-      else
-        Formatters::Plain.new
-      end
+      @options.formatter.new.print(response.body)
     end
   end
 end

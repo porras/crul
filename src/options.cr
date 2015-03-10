@@ -3,7 +3,13 @@ require "uri"
 
 module Crul
   class Options
-    property :formatter
+    property :formatter, :method
+    property! :url
+
+    def initialize
+      @formatter = Formatters::Plain
+      @method = "GET"
+    end
 
     def self.parse(args)
       new.tap do |options|
@@ -24,27 +30,10 @@ module Crul
               puts parser
               exit -1
             end
-            options.url = args.first
+            options.url = URI.parse(args.first)
           end
         end
       end
-    end
-
-    def method=(method)
-      raise "Method #{method} not supported" unless %w(GET POST PUT DELETE).includes?(method.upcase)
-      @method = method.upcase
-    end
-
-    def method
-      @method || "GET"
-    end
-
-    def url=(url)
-      @url = URI.parse(url)
-    end
-
-    def url
-      @url.not_nil!
     end
   end
 end

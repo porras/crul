@@ -20,13 +20,13 @@ describe Crul::Options do
       options.formatter.should eq(Crul::Formatters::JSON)
     end
 
-    it "defaults to no formatter" do
+    it "defaults to Plain formatter" do
       options = Crul::Options.parse("-X GET http://example.org".split(" "))
 
       options.method.should eq("GET")
       options.url.should be_a(URI)
       options.url.to_s.should eq("http://example.org")
-      options.formatter.should be_nil
+      options.formatter.should eq(Crul::Formatters::Plain)
     end
 
     it "defaults to GET" do
@@ -44,7 +44,7 @@ describe Crul::Options do
       options.method.should eq("GET")
       options.url.should be_a(URI)
       options.url.to_s.should eq("http://example.org")
-      options.formatter.should be_nil
+      options.formatter.should eq(Crul::Formatters::Plain)
     end
   end
 end
