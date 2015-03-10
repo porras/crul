@@ -46,5 +46,11 @@ describe Crul::Options do
       options.url.to_s.should eq("http://example.org")
       options.formatter.should eq(Crul::Formatters::Plain)
     end
+
+    it "accepts a request body" do
+      options = Crul::Options.parse("http://example.org -d data".split(" "))
+
+      options.body.should eq("data")
+    end
   end
 end

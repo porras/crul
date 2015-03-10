@@ -3,12 +3,13 @@ require "uri"
 
 module Crul
   class Options
-    property :formatter, :method
+    property :formatter, :method, :body
     property! :url
 
     def initialize
       @formatter = Formatters::Plain
       @method = "GET"
+      @body = ""
     end
 
     def self.parse(args)
@@ -20,6 +21,9 @@ module Crul
           end
           parser.on("-j", "--json", "Format response as JSON") do |method|
             options.formatter = Formatters::JSON
+          end
+          parser.on("-d DATA", "--data DATA", "Request body") do |body|
+            options.body = body
           end
           parser.on("-h", "--help", "Show this help") do
             puts parser
