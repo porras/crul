@@ -52,5 +52,12 @@ describe Crul::Options do
 
       options.body.should eq("data")
     end
+
+    it "accepts headers" do
+      options = Crul::Options.parse("http://example.org -H header1:value1 -H header2:value2".split(" "))
+
+      options.headers["Header1"].should eq("value1")
+      options.headers["Header2"].should eq("value2")
+    end
   end
 end

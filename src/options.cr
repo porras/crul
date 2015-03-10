@@ -1,15 +1,17 @@
 require "option_parser"
+require "http/headers"
 require "uri"
 
 module Crul
   class Options
-    property :formatter, :method, :body
+    property :formatter, :method, :body, :headers
     property! :url
 
     def initialize
       @formatter = Formatters::Plain
       @method = "GET"
       @body = ""
+      @headers = HTTP::Headers.new
     end
 
     def self.parse(args)
@@ -24,6 +26,10 @@ module Crul
           end
           parser.on("-d DATA", "--data DATA", "Request body") do |body|
             options.body = body
+          end
+          parser.on("-H HEADER", "--header HEADER", "Set header") do |header|
+            name, value = header.split(":")
+            options.headers[name] = value
           end
           parser.on("-h", "--help", "Show this help") do
             puts parser
