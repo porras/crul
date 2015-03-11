@@ -3,7 +3,7 @@ require "./spec_helper"
 describe Crul::Options do
   describe ".parse" do
     it "GET with JSON" do
-      options = Crul::Options.parse("-X GET http://example.org -j".split(" "))
+      options = Crul::Options.parse("GET http://example.org -j".split(" "))
 
       options.method.should eq("GET")
       options.url.should be_a(URI)
@@ -12,7 +12,7 @@ describe Crul::Options do
     end
 
     it "POST with JSON" do
-      options = Crul::Options.parse("-X POST http://example.org -j".split(" "))
+      options = Crul::Options.parse("POST http://example.org -j".split(" "))
 
       options.method.should eq("POST")
       options.url.should be_a(URI)
@@ -21,7 +21,7 @@ describe Crul::Options do
     end
 
     it "defaults to Plain formatter" do
-      options = Crul::Options.parse("-X GET http://example.org".split(" "))
+      options = Crul::Options.parse("GET http://example.org".split(" "))
 
       options.method.should eq("GET")
       options.url.should be_a(URI)

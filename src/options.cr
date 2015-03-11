@@ -17,10 +17,13 @@ module Crul
     def self.parse(args)
       new.tap do |options|
         OptionParser.parse(args) do |parser|
-          parser.banner = "Usage: crul [options] URL"
-          parser.on("-X METHOD", "--method METHOD", "Use GET|POST|PUT|DELETE (default: GET)") do |method|
-            options.method = method
-          end
+          parser.banner = "Usage: crul [method] URL [options]"
+
+          parser.on("get",    "GET",    "Use GET (default)") { options.method = "GET"    }
+          parser.on("post",   "POST",   "Use POST")          { options.method = "POST"   }
+          parser.on("put",    "PUT",    "Use PUT")           { options.method = "PUT"    }
+          parser.on("delete", "DELETE", "Use DELETE")        { options.method = "DELETE" }
+
           parser.on("-d DATA", "--data DATA", "Request body") do |body|
             options.body = body
           end
@@ -28,6 +31,7 @@ module Crul
             name, value = header.split(":")
             options.headers[name] = value
           end
+
           parser.on("-j", "--json", "Format response as JSON") do |method|
             options.formatter = Formatters::JSON
           end
@@ -35,6 +39,7 @@ module Crul
             puts parser
             exit
           end
+
           parser.unknown_args do |args|
             if args.empty?
               puts parser

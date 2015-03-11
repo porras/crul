@@ -32,12 +32,70 @@ can build from sources, see [Development](#development).
 
 ## Usage
 
-    Usage: crul [options] URL
-        -X METHOD, --method METHOD       Use GET|POST|PUT|DELETE (default: GET)
+    Usage: crul [method] URL [options]
+        get, GET                         Use GET (default)
+        post, POST                       Use POST
+        put, PUT                         Use PUT
+        delete, DELETE                   Use DELETE
         -d DATA, --data DATA             Request body
         -H HEADER, --header HEADER       Set header
         -j, --json                       Format response as JSON
         -h, --help                       Show this help
+
+## Examples
+
+### GET request
+
+    $ crul http://httpbin.org/get?a=b
+    HTTP/1.1 200 OK
+    Server: nginx
+    Date: Wed, 11 Mar 2015 07:57:33 GMT
+    Content-type: application/json
+    Content-length: 179
+    Connection: keep-alive
+    Access-control-allow-origin: *
+    Access-control-allow-credentials: true
+
+    {
+      "args": {
+        "a": "b"
+      },
+      "headers": {
+        "Content-Length": "0",
+        "Host": "httpbin.org"
+      },
+      "origin": "188.103.25.204",
+      "url": "http://httpbin.org/get?a=b"
+    }
+
+### PUT request
+
+    $ crul put http://httpbin.org/put -d '{"a":"b"}' -H Content-Type:application/json
+    HTTP/1.1 200 OK
+    Server: nginx
+    Date: Wed, 11 Mar 2015 07:58:54 GMT
+    Content-type: application/json
+    Content-length: 290
+    Connection: keep-alive
+    Access-control-allow-origin: *
+    Access-control-allow-credentials: true
+
+    {
+      "args": {},
+      "data": "{\"a\":\"b\"}",
+      "files": {},
+      "form": {},
+      "headers": {
+        "Content-Length": "9",
+        "Content-Type": "application/json",
+        "Host": "httpbin.org"
+      },
+      "json": {
+        "a": "b"
+      },
+      "origin": "188.103.25.204",
+      "url": "http://httpbin.org/put"
+    }
 
 ## Development
 
