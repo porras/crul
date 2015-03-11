@@ -24,7 +24,7 @@ It's written in the [Crystal](http://crystal-lang.org/) language.
 ## Installation
 
 Download [the latest
-binary](https://github.com/porras/crul/releases/download/v0.0.1a/crul) and put
+binary](https://github.com/porras/crul/releases/download/v0.0.1b/crul) and put
 it somewhere in your `$PATH`.
 
 Currently, this release is only for Mac, if you want a Linux or Windows one, you
