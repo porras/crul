@@ -5,7 +5,8 @@ HTTP client. It has less features and options, but it aims to be more user
 friendly. It's heavily inspired by
 [httpie](https://github.com/jakubroztocil/httpie).
 
-It's written in the [Crystal](http://crystal-lang.org/) language.
+It's written in the [Crystal](http://crystal-lang.org/) language. It's in an
+early stage but it allows already basic usage.
 
 ## Features
 
@@ -20,6 +21,7 @@ It's written in the [Crystal](http://crystal-lang.org/) language.
 * User friendly headers and request body generation (similar to
 [httpie's](https://github.com/jakubroztocil/httpie#request-items))
 * Basic and digest authentication
+* More fancy stuff
 
 ## Installation
 
