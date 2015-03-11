@@ -11,7 +11,6 @@ module Crul
     def initialize
       @formatter = Formatters::Plain
       @method = Methods::GET
-      @body = ""
       @headers = HTTP::Headers.new
     end
 
