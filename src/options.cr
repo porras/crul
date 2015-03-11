@@ -1,6 +1,7 @@
 require "option_parser"
 require "http/headers"
 require "uri"
+require "./methods"
 
 module Crul
   class Options
@@ -9,7 +10,7 @@ module Crul
 
     def initialize
       @formatter = Formatters::Plain
-      @method = "GET"
+      @method = Methods::GET
       @body = ""
       @headers = HTTP::Headers.new
     end
@@ -19,10 +20,10 @@ module Crul
         OptionParser.parse(args) do |parser|
           parser.banner = "Usage: crul [method] URL [options]"
 
-          parser.on("get",    "GET",    "Use GET (default)") { options.method = "GET"    }
-          parser.on("post",   "POST",   "Use POST")          { options.method = "POST"   }
-          parser.on("put",    "PUT",    "Use PUT")           { options.method = "PUT"    }
-          parser.on("delete", "DELETE", "Use DELETE")        { options.method = "DELETE" }
+          parser.on("get",    "GET",    "Use GET (default)") { options.method = Methods::GET    }
+          parser.on("post",   "POST",   "Use POST")          { options.method = Methods::POST   }
+          parser.on("put",    "PUT",    "Use PUT")           { options.method = Methods::PUT    }
+          parser.on("delete", "DELETE", "Use DELETE")        { options.method = Methods::DELETE }
 
           parser.on("-d DATA", "--data DATA", "Request body") do |body|
             options.body = body

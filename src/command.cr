@@ -7,7 +7,7 @@ module Crul
 
     def run!
       connect do |client|
-        print_response client.exec(@options.method, @options.url.full_path, @options.headers, @options.body)
+        print_response client.exec(@options.method.to_s, @options.url.full_path, @options.headers, @options.body)
       end
     end
 
