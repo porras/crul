@@ -2,7 +2,7 @@ require "http/client"
 
 module Crul
   class Command
-    def initialize(@options)
+    def initialize(@output, @options)
     end
 
     def run!
@@ -22,12 +22,12 @@ module Crul
     end
 
     private def print_response(response)
-      puts "#{response.version} #{response.status_code} #{response.status_message}"
+      @output.puts "#{response.version} #{response.status_code} #{response.status_message}"
       response.headers.each do |name, value|
-        puts "#{name}: #{value}"
+        @output.puts "#{name}: #{value}"
       end
-      puts
-      @options.formatter.new.print(response.body)
+      @output.puts
+      @options.formatter.new(@output).print(response.body)
     end
   end
 end

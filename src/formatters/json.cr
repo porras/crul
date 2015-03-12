@@ -1,13 +1,19 @@
 require "json"
 require "colorize"
+require "../formatters"
 
 module Crul
   module Formatters
-    class JSON
+    class JSON < Base
       def print(body)
-        printer = PrettyPrinter.new(body, STDOUT)
-        printer.print
-        STDOUT.puts
+        begin
+          printer = PrettyPrinter.new(body, @output)
+          printer.print
+          @output.puts
+        rescue JSON::ParseException
+
+          print_plain(body)
+        end
       end
 
       # taken verbatim from https://github.com/manastech/crystal/blob/2aeb8a0f49e604cf782075380ebd9d51b838fc22/samples/pretty_json.cr

@@ -1,8 +1,10 @@
+require "../formatters"
+
 module Crul
   module Formatters
-    class Plain
+    class Plain < Base
       def print(body)
-        puts body
+        @output.puts body
       end
     end
   end

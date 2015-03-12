@@ -2,6 +2,7 @@ require "option_parser"
 require "http/headers"
 require "uri"
 require "./methods"
+require "./formatters"
 
 module Crul
   class Options
