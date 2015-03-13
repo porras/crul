@@ -19,6 +19,9 @@ module Crul
           client.close
         end
       end
+    rescue e : Errno
+      puts e.message
+      exit -1
     end
 
     private def print_response(response)
