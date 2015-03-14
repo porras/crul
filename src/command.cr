@@ -19,7 +19,7 @@ module Crul
           client.close
         end
       end
-    rescue e : Errno
+    rescue e : Errno | SocketError
       puts e.message
       exit -1
     end
