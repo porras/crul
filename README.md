@@ -25,8 +25,7 @@ early stage but it allows already basic usage.
 
 ## Installation
 
-Download [the latest
-binary](https://github.com/porras/crul/releases/download/v0.0.1b/crul.zip) and unzip
+Download [the latest release](https://github.com/porras/crul/releases) and unzip
 it somewhere in your `$PATH`.
 
 Currently, this release is only for Mac, if you want a Linux or Windows one, you
