@@ -38,6 +38,15 @@ describe Crul::Options do
       options.formatter.should eq(Crul::Formatters::JSON)
     end
 
+    it "GET with XML" do
+      options = Crul::Options.parse("GET http://example.org -x".split(" "))
+
+      options.method.should eq(Crul::Methods::GET)
+      options.url.should be_a(URI)
+      options.url.to_s.should eq("http://example.org")
+      options.formatter.should eq(Crul::Formatters::XML)
+    end
+
     it "most basic" do
       options = Crul::Options.parse("http://example.org".split(" "))
 

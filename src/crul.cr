@@ -1,4 +1,5 @@
 require "./socket_fix"
+require "./xml_fix"
 require "./options"
 require "./command"
 

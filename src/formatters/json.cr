@@ -11,7 +11,6 @@ module Crul
           printer.print
           @output.puts
         rescue JSON::ParseException
-
           print_plain(body)
         end
       end
@@ -19,7 +18,7 @@ module Crul
       # taken verbatim from https://github.com/manastech/crystal/blob/2aeb8a0f49e604cf782075380ebd9d51b838fc22/samples/pretty_json.cr
       class PrettyPrinter
         def initialize(@input, @output)
-          @pull = JSON::PullParser.new @input
+          @pull = JSON::PullParser.new(@input)
           @indent = 0
         end
 

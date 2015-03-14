@@ -36,6 +36,9 @@ module Crul
           parser.on("-j", "--json", "Format response as JSON") do |method|
             options.formatter = Formatters::JSON
           end
+          parser.on("-x", "--xml", "Format response as XML") do |method|
+            options.formatter = Formatters::XML
+          end
           parser.on("-h", "--help", "Show this help") do
             puts parser
             exit
