@@ -59,5 +59,12 @@ describe Crul::Options do
       options.headers["Header1"].should eq("value1")
       options.headers["Header2"].should eq("value2")
     end
+
+    it "accepts headers with JSON values" do
+      header_value = {"a" => "b"}
+      options = Crul::Options.parse("http://example.org -H JSON:#{header_value.to_json}".split(" "))
+
+      JSON.parse(options.headers["json"]).should eq(header_value)
+    end
   end
 end

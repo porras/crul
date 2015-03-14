@@ -29,7 +29,7 @@ module Crul
             options.body = body
           end
           parser.on("-H HEADER", "--header HEADER", "Set header") do |header|
-            name, value = header.split(":")
+            name, value = header.split(':', 2)
             options.headers[name] = value
           end
 
