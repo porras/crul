@@ -3,8 +3,8 @@ require "../formatters"
 module Crul
   module Formatters
     class Plain < Base
-      def print(body)
-        @output.puts body
+      def print
+        @output.puts @response.body
       end
     end
   end

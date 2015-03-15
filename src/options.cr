@@ -10,7 +10,7 @@ module Crul
     property! :url
 
     def initialize
-      @formatter = Formatters::Plain
+      @formatter = Formatters::Auto
       @method = Methods::GET
       @headers = HTTP::Headers.new
     end
@@ -38,6 +38,9 @@ module Crul
           end
           parser.on("-x", "--xml", "Format response as XML") do |method|
             options.formatter = Formatters::XML
+          end
+          parser.on("-p", "--plain", "Format response as plain text") do |method|
+            options.formatter = Formatters::Plain
           end
           parser.on("-h", "--help", "Show this help") do
             puts parser

@@ -20,13 +20,13 @@ describe Crul::Options do
       options.formatter.should eq(Crul::Formatters::JSON)
     end
 
-    it "defaults to Plain formatter" do
+    it "defaults to auto formatter" do
       options = Crul::Options.parse("GET http://example.org".split(" "))
 
       options.method.should eq(Crul::Methods::GET)
       options.url.should be_a(URI)
       options.url.to_s.should eq("http://example.org")
-      options.formatter.should eq(Crul::Formatters::Plain)
+      options.formatter.should eq(Crul::Formatters::Auto)
     end
 
     it "defaults to GET" do
@@ -47,13 +47,22 @@ describe Crul::Options do
       options.formatter.should eq(Crul::Formatters::XML)
     end
 
+    it "GET with plain" do
+      options = Crul::Options.parse("GET http://example.org -p".split(" "))
+
+      options.method.should eq(Crul::Methods::GET)
+      options.url.should be_a(URI)
+      options.url.to_s.should eq("http://example.org")
+      options.formatter.should eq(Crul::Formatters::Plain)
+    end
+
     it "most basic" do
       options = Crul::Options.parse("http://example.org".split(" "))
 
       options.method.should eq(Crul::Methods::GET)
       options.url.should be_a(URI)
       options.url.to_s.should eq("http://example.org")
-      options.formatter.should eq(Crul::Formatters::Plain)
+      options.formatter.should eq(Crul::Formatters::Auto)
     end
 
     it "accepts a request body" do

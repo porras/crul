@@ -30,7 +30,7 @@ module Crul
         @output.puts "#{name}: #{value}"
       end
       @output.puts
-      @options.formatter.new(@output).print(response.body)
+      @options.formatter.new(@output, response).print
     end
   end
 end

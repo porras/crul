@@ -4,9 +4,10 @@ describe Crul::Formatters::Plain do
   describe "#print" do
     it "prints" do
       output = StringIO.new
-      formatter = Crul::Formatters::Plain.new(output)
+      response = FakeResponse.new("Hello")
+      formatter = Crul::Formatters::Plain.new(output, response)
 
-      formatter.print("Hello")
+      formatter.print
 
       output.to_s.strip.should eq("Hello")
     end

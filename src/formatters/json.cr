@@ -5,13 +5,13 @@ require "../formatters"
 module Crul
   module Formatters
     class JSON < Base
-      def print(body)
+      def print
         begin
-          printer = PrettyPrinter.new(body, @output)
+          printer = PrettyPrinter.new(@response.body, @output)
           printer.print
           @output.puts
         rescue JSON::ParseException
-          print_plain(body)
+          print_plain
         end
       end
 

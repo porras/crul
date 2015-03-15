@@ -1,11 +1,11 @@
 module Crul
   module Formatters
     abstract class Base
-      def initialize(@output)
+      def initialize(@output, @response)
       end
 
-      def print_plain(body)
-        Plain.new(@output).print(body)
+      def print_plain
+        Plain.new(@output, @response).print
       end
     end
   end
