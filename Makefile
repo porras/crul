@@ -9,7 +9,7 @@ spec:
 build: crul
 
 crul: crul.cr src/*.cr src/formatters/*.cr
-	crystal build crul.cr
+	crystal build --release crul.cr
 	@du -sh crul
 
 ## release
