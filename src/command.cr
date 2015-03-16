@@ -1,4 +1,5 @@
 require "http/client"
+require "colorize"
 
 module Crul
   class Command
@@ -25,9 +26,12 @@ module Crul
     end
 
     private def print_response(response)
-      @output.puts "#{response.version} #{response.status_code} #{response.status_message}"
+      with_color.light_blue.surround { @output << response.version }
+      with_color.cyan.surround { @output << " #{response.status_code} " }
+      with_color.yellow.surround { @output.puts response.status_message }
       response.headers.each do |name, value|
-        @output.puts "#{name}: #{value}"
+        @output << "#{name}: "
+        with_color.cyan.surround { @output.puts value }
       end
       @output.puts
       @options.formatter.new(@output, response).print
