@@ -13,11 +13,10 @@ early stage but it allows already basic usage.
 * Fast
 * No dependencies, easy to install
 * Basic HTTP features (method, request body, headers)
-* Syntax highlighting of the output (currently, only JSON)
+* Syntax highlighting of the output (JSON and XML)
 
 ## Planned features
 
-* XML highlight
 * User friendly headers and request body generation (similar to
 [httpie's](https://github.com/jakubroztocil/httpie#request-items))
 * Basic and digest authentication
@@ -41,6 +40,8 @@ can build from sources, see [Development](#development).
         -d DATA, --data DATA             Request body
         -H HEADER, --header HEADER       Set header
         -j, --json                       Format response as JSON
+        -x, --xml                        Format response as XML
+        -p, --plain                      Format response as plain text
         -h, --help                       Show this help
 
 ## Examples
