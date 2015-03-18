@@ -7,6 +7,7 @@ require "./formatters"
 module Crul
   class Options
     property :formatter, :method, :body, :headers
+    property :basic_auth
     property! :url
 
     def initialize
@@ -41,6 +42,10 @@ module Crul
           end
           parser.on("-p", "--plain", "Format response as plain text") do |method|
             options.formatter = Formatters::Plain
+          end
+          parser.on("-a USER:PASS", "--auth USER:PASS", "Basic auth") do |user_pass|
+            pieces = user_pass.split(':', 2)
+            options.basic_auth = {pieces[0], pieces[1]? || ""}
           end
           parser.on("-h", "--help", "Show this help") do
             puts parser

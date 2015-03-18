@@ -84,5 +84,15 @@ describe Crul::Options do
 
       JSON.parse(options.headers["json"]).should eq(header_value)
     end
+
+    it "gets user and password with --auth" do
+      options = Crul::Options.parse("GET http://example.org --auth foo:bar".split(" "))
+      options.basic_auth.should eq({"foo", "bar"})
+    end
+
+    it "gets user and password with -a" do
+      options = Crul::Options.parse("GET http://example.org -a foo:bar".split(" "))
+      options.basic_auth.should eq({"foo", "bar"})
+    end
   end
 end

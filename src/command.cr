@@ -14,6 +14,10 @@ module Crul
 
     private def connect
       HTTP::Client.new(@options.url.host.not_nil!, @options.url.port, @options.url.scheme == "https") do |client|
+        if basic_auth = @options.basic_auth
+          client.basic_auth(*basic_auth)
+        end
+
         begin
           yield client
         ensure
