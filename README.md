@@ -14,12 +14,13 @@ early stage but it allows already basic usage.
 * No dependencies, easy to install
 * Basic HTTP features (method, request body, headers)
 * Syntax highlighting of the output (JSON and XML)
+* Basic authentication
 
 ## Planned features
 
 * User friendly headers and request body generation (similar to
 [httpie's](https://github.com/jakubroztocil/httpie#request-items))
-* Basic and digest authentication
+* Digest authentication
 * More fancy stuff
 
 ## Installation
@@ -42,6 +43,7 @@ can build from sources, see [Development](#development).
         -j, --json                       Format response as JSON
         -x, --xml                        Format response as XML
         -p, --plain                      Format response as plain text
+        -a USER:PASS, --auth USER:PASS   Basic auth
         -h, --help                       Show this help
 
 ## Examples
