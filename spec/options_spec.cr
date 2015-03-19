@@ -9,6 +9,7 @@ describe Crul::Options do
       options.url.should be_a(URI)
       options.url.to_s.should eq("http://example.org")
       options.formatter.should eq(Crul::Formatters::JSON)
+      options.basic_auth.should eq(nil)
     end
 
     it "POST with JSON" do
