@@ -25,7 +25,7 @@ early stage but it allows already basic usage.
 
 ## Installation
 
-Download [the latest release](https://github.com/porras/crul/releases) and unzip it somewhere in your `$PATH`, like this `wget https://github.com/porras/crul/releases/download/v0.1.0/darwin-amd64-crul.zip && unzip darwin-amd64-crul.zip && mv ./crul ~/bin/ && rm darwin-amd64-crul.zip`
+Download [the latest release](https://github.com/porras/crul/releases) and unzip it somewhere in your `$PATH`, like this `wget https://github.com/porras/crul/releases/download/v0.2.0/darwin-amd64-crul.zip && unzip darwin-amd64-crul.zip && mv ./crul ~/bin/ && rm darwin-amd64-crul.zip`
 
 Currently, this release is only for Mac, if you want a Linux or Windows one, you
 can build from sources, see [Development](#development).
