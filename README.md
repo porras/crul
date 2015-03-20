@@ -25,10 +25,18 @@ early stage but it allows already basic usage.
 
 ## Installation
 
-Download [the latest release](https://github.com/porras/crul/releases) and unzip it somewhere in your `$PATH`, like this `wget https://github.com/porras/crul/releases/download/v0.2.0/darwin-amd64-crul.zip && unzip darwin-amd64-crul.zip && mv ./crul ~/bin/ && rm darwin-amd64-crul.zip`
+### Mac
 
-Currently, this release is only for Mac, if you want a Linux or Windows one, you
-can build from sources, see [Development](#development).
+    brew tap porras/crul
+    brew install crul
+    
+Or, if you prefer, download [the latest release](https://github.com/porras/crul/releases)
+and unzip it somewhere in your `$PATH`.
+
+### Linux
+
+Currently, the binary in the release is only for Mac, if you want a Linux one, you
+can build it from the source code, see [Development](#development).
 
 ## Usage
 
