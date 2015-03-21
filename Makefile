@@ -1,4 +1,5 @@
 VERSION=0.2.0
+ZIPNAME=crul-$(VERSION)-$(shell uname -m -s|tr '[:upper:] ' '[:lower:]-').zip
 
 all: spec build
 
@@ -12,26 +13,14 @@ crul: crul.cr src/*.cr src/formatters/*.cr
 	crystal build --release crul.cr
 	@du -sh crul
 
-## release
+release: $(ZIPNAME)
 
--include .github
-.PHONY: release
-release: .github spec build zips
-	@# requires https://github.com/aktau/github-release installed
-	git tag v$(VERSION)
-	git push --tags
-	github-release release -s $(GITHUB_TOKEN) -u $(GITHUB_USER) -r $(GITHUB_REPO) -t v$(VERSION) -n "Crul v$(VERSION)" --draft
-	github-release upload  -s $(GITHUB_TOKEN) -u $(GITHUB_USER) -r $(GITHUB_REPO) -t v$(VERSION) -n darwin-amd64-crul.zip -f release/darwin-amd64-crul.zip
-	open https://github.com/$(GITHUB_USER)/$(GITHUB_REPO)/releases
-
-zips: release/darwin-amd64-crul.zip
-
-release/darwin-amd64-crul.zip: crul
-	mkdir -p release
-	zip $@ crul
+$(ZIPNAME): crul LICENSE.txt
+	@zip $@ crul LICENSE.txt > /dev/null
+	@du -sh $@
 
 clean:
-	rm -rf .crystal release crul
+	rm -rf .crystal crul
 
 PREFIX ?= /usr/local
 
