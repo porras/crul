@@ -12,6 +12,6 @@ deploy:
   provider: releases
   api_key:
     secure: VPNhmZR0qN7bZKcjA0BhtwaWpqlbMZWvtwYoUkqUdBE9tDG4c8llGrVRTk5Xd6RX5rPoWcR0JY+tq3vdIkVvlIW2pH/iMdwlIHapEtYOLpVTGQ3ikknLcqsR/EcOxUZxBNQCFiVDnC3Pn3vfLzpLLhCsTUkEq8RQLmjISjZnJ3E=
-  file: crul
+  file: *.zip
   on:
     tags: true
