@@ -7,7 +7,7 @@ install:
 script:
   - make spec
 before_deploy:
-  - make build
+  - make release
 deploy:
   provider: releases
   api_key:
