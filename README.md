@@ -29,14 +29,24 @@ early stage but it allows already basic usage.
 
     brew tap porras/crul
     brew install crul
-    
+
 Or, if you prefer, download [the latest release](https://github.com/porras/crul/releases)
 and unzip it somewhere in your `$PATH`.
 
 ### Linux
 
-Currently, the binary in the release is only for Mac, if you want a Linux one, you
-can build it from the source code, see [Development](#development).
+[The latest release](https://github.com/porras/crul/releases) includes a Linux 64
+bits binary that reportedly works on:
+
+* Ubuntu 12.04 LTS
+* Ubuntu 14.04
+* Debian testing
+
+If you're a user of those distros (or a different one and want to help trying),
+download it and unzip it somewhere in your `$PATH`.
+
+If you use a different distro, you'll have to build it from the source code,
+see [Development](#development).
 
 ## Usage
 
@@ -110,7 +120,9 @@ can build it from the source code, see [Development](#development).
 
 ## Development
 
-After checking out the repo, run `make` to run the tests and compile the source.
+After checking out the repo (or decompressing the tarball with the source code), run `make`
+to run the tests and compile the source. Optionally, you can run `make install` to install it
+(as a default, in /usr/local/bin, override it running `PREFIX=/opt/whatever make install`).
 
 ## Contributing
 

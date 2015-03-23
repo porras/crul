@@ -32,3 +32,9 @@ release/darwin-amd64-crul.zip: crul
 
 clean:
 	rm -rf .crystal release crul
+
+PREFIX ?= /usr/local
+
+install: crul
+	install -d $(PREFIX)/bin
+	install crul $(PREFIX)/bin
