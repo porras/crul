@@ -1,4 +1,5 @@
 require "option_parser"
+require "./option_parser_fix"
 require "http/headers"
 require "uri"
 require "./methods"
@@ -21,11 +22,15 @@ module Crul
         OptionParser.parse(args) do |parser|
           parser.banner = "Usage: crul [method] URL [options]"
 
-          parser.on("get",    "GET",    "Use GET (default)") { options.method = Methods::GET    }
-          parser.on("post",   "POST",   "Use POST")          { options.method = Methods::POST   }
-          parser.on("put",    "PUT",    "Use PUT")           { options.method = Methods::PUT    }
-          parser.on("delete", "DELETE", "Use DELETE")        { options.method = Methods::DELETE }
+          parser.separator
+          parser.separator "HTTP methods (default: GET):"
+          parser.on("get",    "GET",    "Use GET")    { options.method = Methods::GET    }
+          parser.on("post",   "POST",   "Use POST")   { options.method = Methods::POST   }
+          parser.on("put",    "PUT",    "Use PUT")    { options.method = Methods::PUT    }
+          parser.on("delete", "DELETE", "Use DELETE") { options.method = Methods::DELETE }
 
+          parser.separator
+          parser.separator "HTTP options:"
           parser.on("-d DATA", "--data DATA", "Request body") do |body|
             options.body = body
           end
@@ -33,7 +38,13 @@ module Crul
             name, value = header.split(':', 2)
             options.headers[name] = value
           end
+          parser.on("-a USER:PASS", "--auth USER:PASS", "Basic auth") do |user_pass|
+            pieces = user_pass.split(':', 2)
+            options.basic_auth = {pieces[0], pieces[1]? || ""}
+          end
 
+          parser.separator
+          parser.separator "Response formats (default: autodetect):"
           parser.on("-j", "--json", "Format response as JSON") do |method|
             options.formatter = Formatters::JSON
           end
@@ -43,10 +54,9 @@ module Crul
           parser.on("-p", "--plain", "Format response as plain text") do |method|
             options.formatter = Formatters::Plain
           end
-          parser.on("-a USER:PASS", "--auth USER:PASS", "Basic auth") do |user_pass|
-            pieces = user_pass.split(':', 2)
-            options.basic_auth = {pieces[0], pieces[1]? || ""}
-          end
+
+          parser.separator
+          parser.separator "Other options:"
           parser.on("-h", "--help", "Show this help") do
             puts parser
             exit
@@ -59,6 +69,8 @@ module Crul
             end
             options.url = URI.parse(args.first)
           end
+
+          parser.separator
         end
       end
     end
