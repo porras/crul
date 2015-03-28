@@ -32,8 +32,13 @@ module Crul
           parser.separator
           parser.separator "HTTP options:"
           parser.on("-d DATA", "--data DATA", "Request body") do |body|
-            options.body = body
+            options.body = if body.starts_with?('@')
+              File.read(body[1..-1])
+            else
+              body
+            end
           end
+          parser.on("-d @file", "--data @file", "Request body (read from file)") {} # previous handler
           parser.on("-H HEADER", "--header HEADER", "Set header") do |header|
             name, value = header.split(':', 2)
             options.headers[name] = value

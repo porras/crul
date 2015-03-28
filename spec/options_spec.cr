@@ -72,6 +72,12 @@ describe Crul::Options do
       options.body.should eq("data")
     end
 
+    it "accepts a request body as a file" do
+      options = Crul::Options.parse("http://example.org -d @LICENSE.txt".split(" "))
+
+      options.body.should match(/\AThe MIT License/)
+    end
+
     it "accepts headers" do
       options = Crul::Options.parse("http://example.org -H header1:value1 -H header2:value2".split(" "))
 
