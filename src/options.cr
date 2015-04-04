@@ -1,10 +1,4 @@
 require "option_parser"
-require "./option_parser_fix"
-require "http/headers"
-require "uri"
-require "./methods"
-require "./formatters"
-require "./cookie_store"
 
 module Crul
   class Options

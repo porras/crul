@@ -1,6 +1,5 @@
 require "xml"
 require "colorize"
-require "../formatters"
 
 module Crul
   module Formatters

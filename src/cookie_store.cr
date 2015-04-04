@@ -1,5 +1,3 @@
-require "json"
-
 module Crul
   class CookieStore
     getter :filename

@@ -1,8 +1,3 @@
-require "./socket_fix"
-require "./xml_fix"
-require "./options"
-require "./command"
-
 module Crul
   module CLI
     def self.run!

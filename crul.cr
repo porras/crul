@@ -1,3 +1,3 @@
-require "./src/crul"
+require "./src/*"
 
 Crul::CLI.run!

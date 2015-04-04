@@ -1,5 +1,3 @@
-require "../formatters"
-
 module Crul
   module Formatters
     class Plain < Base
