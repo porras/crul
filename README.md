@@ -15,6 +15,7 @@ early stage but it allows already basic usage.
 * Basic HTTP features (method, request body, headers)
 * Syntax highlighting of the output (JSON and XML)
 * Basic authentication
+* Cookie store
 
 ## Planned features
 
@@ -51,16 +52,26 @@ see [Development](#development).
 ## Usage
 
     Usage: crul [method] URL [options]
-        get, GET                         Use GET (default)
+
+    HTTP methods (default: GET):
+        get, GET                         Use GET
         post, POST                       Use POST
         put, PUT                         Use PUT
         delete, DELETE                   Use DELETE
+
+    HTTP options:
         -d DATA, --data DATA             Request body
+        -d @file, --data @file           Request body (read from file)
         -H HEADER, --header HEADER       Set header
+        -a USER:PASS, --auth USER:PASS   Basic auth
+        -c FILE, --cookies FILE          Use FILE as cookie store (reads and writes)
+
+    Response formats (default: autodetect):
         -j, --json                       Format response as JSON
         -x, --xml                        Format response as XML
         -p, --plain                      Format response as plain text
-        -a USER:PASS, --auth USER:PASS   Basic auth
+
+    Other options:
         -h, --help                       Show this help
 
 ## Examples
