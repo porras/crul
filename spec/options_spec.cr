@@ -10,6 +10,7 @@ describe Crul::Options do
       options.url.to_s.should eq("http://example.org")
       options.formatter.should eq(Crul::Formatters::JSON)
       options.basic_auth.should eq(nil)
+      options.cookie_store.filename.should eq(nil)
     end
 
     it "POST with JSON" do
@@ -108,6 +109,12 @@ describe Crul::Options do
     it "gets user and password with -a" do
       options = Crul::Options.parse("GET http://example.org -a foo:bar".split(" "))
       options.basic_auth.should eq({"foo", "bar"})
+    end
+
+    it "reads and writes cookies from file" do
+      options = Crul::Options.parse("GET http://example.org -c /tmp/cookies.json".split(" "))
+      options.cookie_store.should be_a(Crul::CookieStore)
+      options.cookie_store.filename.should eq("/tmp/cookies.json")
     end
   end
 end
