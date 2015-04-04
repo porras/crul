@@ -7,19 +7,20 @@ require "./formatters"
 
 module Crul
   class Options
-    property :formatter, :method, :body, :headers
-    property :basic_auth
-    property! :url
+    property :formatter, :method, :body, :headers, :basic_auth, :errors
+    property! :url, :parser
+    property? :help
 
     def initialize
       @formatter = Formatters::Auto
       @method = Methods::GET
       @headers = HTTP::Headers.new
+      @errors = [] of Exception
     end
 
     def self.parse(args)
       new.tap do |options|
-        OptionParser.parse(args) do |parser|
+        options.parser = OptionParser.parse(args) do |parser|
           parser.banner = "Usage: crul [method] URL [options]"
 
           parser.separator
@@ -33,7 +34,12 @@ module Crul
           parser.separator "HTTP options:"
           parser.on("-d DATA", "--data DATA", "Request body") do |body|
             options.body = if body.starts_with?('@')
-              File.read(body[1..-1])
+              begin
+                File.read(body[1..-1])
+              rescue e
+                options.errors << e
+                nil
+              end
             else
               body
             end
@@ -63,16 +69,15 @@ module Crul
           parser.separator
           parser.separator "Other options:"
           parser.on("-h", "--help", "Show this help") do
-            puts parser
-            exit
+            options.help = true
           end
 
           parser.unknown_args do |args|
             if args.empty?
-              puts parser
-              exit -1
+              options.errors << Exception.new("Please specify URL")
+            else
+              options.url = URI.parse(args.first)
             end
-            options.url = URI.parse(args.first)
           end
 
           parser.separator

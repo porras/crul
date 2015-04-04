@@ -75,7 +75,15 @@ describe Crul::Options do
     it "accepts a request body as a file" do
       options = Crul::Options.parse("http://example.org -d @LICENSE.txt".split(" "))
 
+      options.errors.empty?.should be_true
       options.body.should match(/\AThe MIT License/)
+    end
+
+    it "manages a file not found" do
+      options = Crul::Options.parse("http://example.org -d @wadus.txt".split(" "))
+
+      options.errors.empty?.should_not be_true
+      options.body.should be_nil
     end
 
     it "accepts headers" do
