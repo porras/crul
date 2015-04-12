@@ -1,6 +1,5 @@
 require "json"
 require "colorize"
-require "../formatters"
 
 module Crul
   module Formatters

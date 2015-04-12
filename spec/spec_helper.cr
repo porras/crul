@@ -1,5 +1,5 @@
 require "spec"
-require "../src/crul"
+require "../src/*"
 
 struct FakeResponse
   getter :body, :headers

@@ -1,13 +1,8 @@
 require "option_parser"
-require "./option_parser_fix"
-require "http/headers"
-require "uri"
-require "./methods"
-require "./formatters"
 
 module Crul
   class Options
-    property :formatter, :method, :body, :headers, :basic_auth, :errors
+    property :formatter, :method, :body, :headers, :basic_auth, :cookie_store, :errors
     property! :url, :parser
     property? :help
 
@@ -15,6 +10,7 @@ module Crul
       @formatter = Formatters::Auto
       @method = Methods::GET
       @headers = HTTP::Headers.new
+      @cookie_store = CookieStore.new
       @errors = [] of Exception
     end
 
@@ -52,6 +48,9 @@ module Crul
           parser.on("-a USER:PASS", "--auth USER:PASS", "Basic auth") do |user_pass|
             pieces = user_pass.split(':', 2)
             options.basic_auth = {pieces[0], pieces[1]? || ""}
+          end
+          parser.on("-c FILE", "--cookies FILE", "Use FILE as cookie store (reads and writes)") do |file|
+            options.cookie_store.load(file)
           end
 
           parser.separator

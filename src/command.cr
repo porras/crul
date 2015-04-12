@@ -4,16 +4,25 @@ require "colorize"
 module Crul
   class Command
     def initialize(@output, @options)
+      @host = @options.url.host.not_nil!
+      @port = @options.url.port.not_nil!
     end
 
     def run!
       connect do |client|
-        print_response client.exec(@options.method.to_s, @options.url.full_path, @options.headers, @options.body)
+        @options.cookie_store.add_to_headers(@host, @port, @options.headers)
+
+        response = client.exec(@options.method.to_s, @options.url.full_path, @options.headers, @options.body)
+
+        print_response response
+
+        @options.cookie_store.store_cookies(@host, @port, response.headers)
+        @options.cookie_store.write!
       end
     end
 
     private def connect
-      HTTP::Client.new(@options.url.host.not_nil!, @options.url.port, @options.url.scheme == "https") do |client|
+      HTTP::Client.new(@host, @port, @options.url.scheme == "https") do |client|
         if basic_auth = @options.basic_auth
           client.basic_auth(*basic_auth)
         end
