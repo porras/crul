@@ -1,4 +1,4 @@
-VERSION=0.3.0
+VERSION=0.3.1
 ZIPNAME=crul-$(VERSION)-$(shell uname -m -s|tr '[:upper:] ' '[:lower:]-').zip
 
 all: spec build
