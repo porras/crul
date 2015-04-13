@@ -5,7 +5,7 @@ module Crul
   class Command
     def initialize(@output, @options)
       @host = @options.url.host.not_nil!
-      @port = @options.url.port.not_nil!
+      @port = @options.url.port || default_port
     end
 
     def run!
@@ -48,6 +48,10 @@ module Crul
       end
       @output.puts
       @options.formatter.new(@output, response).print
+    end
+
+    private def default_port
+      @options.url.scheme == "https" ? 443 : 80
     end
   end
 end
