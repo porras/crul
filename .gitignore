@@ -2,3 +2,6 @@
 crul
 .github
 release
+.deps
+*.zip
+libs

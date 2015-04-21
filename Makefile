@@ -3,13 +3,16 @@ ZIPNAME=crul-$(VERSION)-$(shell uname -m -s|tr '[:upper:] ' '[:lower:]-').zip
 
 all: spec build
 
+dependencies: Projectfile .deps.lock
+	crystal deps
+
 .PHONY: spec
-spec:
+spec: dependencies
 	crystal spec
 
 build: crul
 
-crul: crul.cr src/*.cr src/formatters/*.cr
+crul: dependencies crul.cr src/*.cr src/formatters/*.cr
 	crystal build --release crul.cr
 	@du -sh crul
 
@@ -20,7 +23,7 @@ $(ZIPNAME): crul LICENSE.txt
 	@du -sh $@
 
 clean:
-	rm -rf .crystal crul
+	rm -rf .crystal crul *.zip .deps libs
 
 PREFIX ?= /usr/local
 

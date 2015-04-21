@@ -1,25 +1,26 @@
 module Crul
   module CLI
-    def self.run!
-      options = Options.parse(ARGV)
+    def self.run!(argv, output)
+      options = Options.parse(argv)
 
       if options.help?
-        puts options.parser
-        exit
+        output.puts options.parser
+        return true
       end
 
       if options.errors.any?
-        puts options.parser
+        output.puts options.parser
 
-        puts "Errors:"
+        output.puts "Errors:"
         options.errors.each do |error|
-          puts "  * " + error.to_s
+          output.puts "  * " + error.to_s
         end
-        puts
-        exit -1
+        output.puts
+        return false
       end
 
-      Command.new(STDOUT, options).run!
+      Command.new(output, options).run!
+      true
     end
   end
 end

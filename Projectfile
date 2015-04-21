@@ -1,0 +1,4 @@
+deps do
+  # switch to manastech/webmock.cr when/if https://github.com/manastech/webmock.cr/pull/1 is merged
+  github "porras/webmock.cr"
+end

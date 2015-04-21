@@ -1,5 +1,6 @@
 require "spec"
 require "../src/*"
+require "webmock"
 
 struct FakeResponse
   getter :body, :headers
@@ -10,4 +11,10 @@ struct FakeResponse
       @headers["Content-Type"] = content_type
     end
   end
+end
+
+def capture_lines(&block)
+  output = StringIO.new
+  yield(output)
+  output.to_s.split("\n")
 end
