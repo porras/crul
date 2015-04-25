@@ -10,6 +10,14 @@ describe "Basic examples" do
     lines[-2].should match(/Please specify URL/)
   end
 
+  it "help" do
+    lines = capture_lines do |output|
+      Crul::CLI.run!(["-h"], output).should be_true
+    end
+
+    lines.first.should match(/\AUsage:/)
+  end
+
   it "most basic GET" do
     WebMock.stub(:get, "http://example.org/").to_return(body: "Hello")
 
@@ -37,6 +45,39 @@ describe "Basic examples" do
 
     lines = capture_lines do |output|
       Crul::CLI.run!(["http://example.org:8080/"], output).should be_true
+    end
+
+    lines.first.should eq("HTTP/1.1 200 OK")
+    lines.last.should eq("Hello")
+  end
+
+  it "basic POST" do
+    WebMock.stub(:post, "http://example.org/").to_return(body: "Hello")
+
+    lines = capture_lines do |output|
+      Crul::CLI.run!(["post", "http://example.org"], output).should be_true
+    end
+
+    lines.first.should eq("HTTP/1.1 200 OK")
+    lines.last.should eq("Hello")
+  end
+
+  it "basic PUT" do
+    WebMock.stub(:put, "http://example.org/").to_return(body: "Hello")
+
+    lines = capture_lines do |output|
+      Crul::CLI.run!(["put", "http://example.org"], output).should be_true
+    end
+
+    lines.first.should eq("HTTP/1.1 200 OK")
+    lines.last.should eq("Hello")
+  end
+
+  it "basic DELETE" do
+    WebMock.stub(:delete, "http://example.org/").to_return(body: "Hello")
+
+    lines = capture_lines do |output|
+      Crul::CLI.run!(["delete", "http://example.org"], output).should be_true
     end
 
     lines.first.should eq("HTTP/1.1 200 OK")
