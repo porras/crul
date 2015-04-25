@@ -1,7 +1,7 @@
 require "../spec_helper"
 
 describe "Basic examples" do
-  it "no args" do
+  webmock_it "no args" do
     lines = capture_lines do |output|
       Crul::CLI.run!([] of String, output).should be_false
     end
@@ -10,7 +10,7 @@ describe "Basic examples" do
     lines[-2].should match(/Please specify URL/)
   end
 
-  it "help" do
+  webmock_it "help" do
     lines = capture_lines do |output|
       Crul::CLI.run!(["-h"], output).should be_true
     end
@@ -18,7 +18,7 @@ describe "Basic examples" do
     lines.first.should match(/\AUsage:/)
   end
 
-  it "most basic GET" do
+  webmock_it "most basic GET" do
     WebMock.stub(:get, "http://example.org/").to_return(body: "Hello")
 
     lines = capture_lines do |output|
@@ -29,7 +29,7 @@ describe "Basic examples" do
     lines.last.should eq("Hello")
   end
 
-  it "most basic GET with https" do
+  webmock_it "most basic GET with https" do
     WebMock.stub(:get, "https://example.org/").to_return(body: "Hello")
 
     lines = capture_lines do |output|
@@ -40,7 +40,7 @@ describe "Basic examples" do
     lines.last.should eq("Hello")
   end
 
-  it "most basic GET with port" do
+  webmock_it "most basic GET with port" do
     WebMock.stub(:get, "http://example.org:8080/").to_return(body: "Hello")
 
     lines = capture_lines do |output|
@@ -51,7 +51,7 @@ describe "Basic examples" do
     lines.last.should eq("Hello")
   end
 
-  it "basic POST" do
+  webmock_it "basic POST" do
     WebMock.stub(:post, "http://example.org/").to_return(body: "Hello")
 
     lines = capture_lines do |output|
@@ -62,7 +62,7 @@ describe "Basic examples" do
     lines.last.should eq("Hello")
   end
 
-  it "basic PUT" do
+  webmock_it "basic PUT" do
     WebMock.stub(:put, "http://example.org/").to_return(body: "Hello")
 
     lines = capture_lines do |output|
@@ -73,7 +73,7 @@ describe "Basic examples" do
     lines.last.should eq("Hello")
   end
 
-  it "basic DELETE" do
+  webmock_it "basic DELETE" do
     WebMock.stub(:delete, "http://example.org/").to_return(body: "Hello")
 
     lines = capture_lines do |output|
