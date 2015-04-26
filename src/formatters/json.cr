@@ -57,32 +57,38 @@ module Crul
         end
 
         def read_array
-          print "[\n"
+          print "["
           @indent += 1
           i = 0
           @pull.read_array do |obj|
             if i > 0
               print ','
               print '\n' if @indent > 0
+            else
+              print '\n'
             end
             print_indent
             read_any
             i += 1
           end
           @indent -= 1
-          print '\n'
-          print_indent
+          if i > 0
+            print '\n'
+            print_indent
+          end
           print ']'
         end
 
         def read_object
-          print "{\n"
+          print "{"
           @indent += 1
           i = 0
           @pull.read_object do |key|
             if i > 0
               print ','
               print '\n' if @indent > 0
+            else
+              print '\n'
             end
             print_indent
             with_color.cyan.surround(@output) do
@@ -93,8 +99,10 @@ module Crul
             i += 1
           end
           @indent -= 1
-          print '\n'
-          print_indent
+          if i > 0
+            print '\n'
+            print_indent
+          end
           print '}'
         end
 
