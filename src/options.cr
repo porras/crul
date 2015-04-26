@@ -75,13 +75,19 @@ module Crul
             if args.empty?
               options.errors << Exception.new("Please specify URL")
             else
-              options.url = URI.parse(args.first)
+              options.url = parse_uri(args.first)
             end
           end
 
           parser.separator
         end
       end
+    end
+
+    private def self.parse_uri(string)
+      uri = URI.parse(string)
+      uri = URI.parse("http://#{string}") if uri.host.nil?
+      uri
     end
   end
 end

@@ -40,6 +40,17 @@ describe "Basic examples" do
     lines.last.should eq("Hello")
   end
 
+  webmock_it "most basic GET without protocol (should default to http://)" do
+    WebMock.stub(:get, "http://example.org/").to_return(body: "Hello")
+
+    lines = capture_lines do |output|
+      Crul::CLI.run!(["example.org"], output).should be_true
+    end
+
+    lines.first.should eq("HTTP/1.1 200 OK")
+    lines.last.should eq("Hello")
+  end
+
   webmock_it "most basic GET with port" do
     WebMock.stub(:get, "http://example.org:8080/").to_return(body: "Hello")
 

@@ -67,6 +67,13 @@ describe Crul::Options do
       options.formatter.should eq(Crul::Formatters::Auto)
     end
 
+    it "without protocol" do
+      options = Crul::Options.parse("example.org".split(" "))
+
+      options.url.should be_a(URI)
+      options.url.to_s.should eq("http://example.org")
+    end
+
     it "accepts a request body" do
       options = Crul::Options.parse("http://example.org -d data".split(" "))
 
