@@ -10,8 +10,7 @@ describe Crul::Formatters::JSON do
 
         formatter.print
 
-        # we should parse and assert on output here but it's full of control codes :D
-        # no exception raised is Good Enough™
+        JSON.parse(uncolorize(output.to_s)).should eq({"a": 1})
       end
     end
 

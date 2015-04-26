@@ -25,3 +25,22 @@ def webmock_it(description, &block)
     WebMock.wrap(&block)
   end
 end
+
+def uncolorize(string)
+  String.build do |output|
+    ignore = false
+    string.chars.each do |char|
+      if ignore
+        if char == 'm'
+          ignore = false
+        end
+      else
+        if char == '\e'
+          ignore = true
+        else
+          output << char
+        end
+      end
+    end
+  end
+end

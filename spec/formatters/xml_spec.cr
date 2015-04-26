@@ -10,8 +10,8 @@ describe Crul::Formatters::XML do
 
         formatter.print
 
-        # we should parse and assert on output here but it's full of control codes :D
-        # no exception raised is Good Enough™
+        # we should parse and assert on output but it'll be much easier with the new XML features in next Crystal release
+        # for the time being no exception raised is Good Enough™
       end
     end
 
