@@ -131,6 +131,9 @@ see [Development](#development).
 
 ## Development
 
+You'll need Crystal 0.7.1 (should also work with 0.7.0 but better upgrade)
+[installed](http://crystal-lang.org/docs/installation/README.html).
+
 After checking out the repo (or decompressing the tarball with the source code), run `make`
 to run the tests and compile the source. Optionally, you can run `make install` to install it
 (as a default, in /usr/local/bin, override it running `PREFIX=/opt/whatever make install`).
