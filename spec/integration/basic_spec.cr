@@ -19,13 +19,14 @@ describe "Basic examples" do
   end
 
   webmock_it "most basic GET" do
-    WebMock.stub(:get, "http://example.org/").to_return(body: "Hello")
+    WebMock.stub(:get, "http://example.org/").to_return(body: "Hello", headers: { "Hello" => "World" })
 
     lines = capture_lines do |output|
       Crul::CLI.run!(["http://example.org"], output).should be_true
     end
 
     lines.first.should eq("HTTP/1.1 200 OK")
+    lines[2].should eq("Hello: World")
     lines.last.should eq("Hello")
   end
 
