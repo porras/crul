@@ -42,9 +42,11 @@ module Crul
       with_color.light_blue.surround { @output << response.version }
       with_color.cyan.surround { @output << " #{response.status_code} " }
       with_color.yellow.surround { @output.puts response.status_message }
-      response.headers.each do |name, value|
-        @output << "#{name}: "
-        with_color.cyan.surround { @output.puts value }
+      response.headers.each do |name, values|
+        values.each do |value|
+          @output << "#{name}: "
+          with_color.cyan.surround { @output.puts value }
+        end
       end
       @output.puts
       @options.formatter.new(@output, response).print
