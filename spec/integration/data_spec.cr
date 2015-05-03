@@ -1,7 +1,7 @@
 require "../spec_helper"
 
 describe "Sending data" do
-  webmock_it "sends the data" do
+  it "sends the data" do
     WebMock.stub(:post, "http://example.org/data")
       .with(body: "Hello")
       .to_return(body: "World")
@@ -14,7 +14,7 @@ describe "Sending data" do
     lines.last.should eq("World")
   end
 
-  webmock_it "sends the data from a file" do
+  it "sends the data from a file" do
     WebMock.stub(:post, "http://example.org/data")
       .with(body: File.read(__FILE__))
       .to_return(body: "World")

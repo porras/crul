@@ -1,7 +1,7 @@
 require "../spec_helper"
 
 describe "Basic auth" do
-  webmock_it "sends the basic auth data" do
+  it "sends the basic auth data" do
     WebMock.stub(:get, "http://example.org/auth")
       .with(headers: {"Authorization" => "Basic #{Base64.strict_encode64("user:secret")}"})
       .to_return(body: "Hello, World")

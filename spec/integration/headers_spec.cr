@@ -1,7 +1,7 @@
 require "../spec_helper"
 
 describe "Sending headers" do
-  webmock_it "sends the headers" do
+  it "sends the headers" do
     WebMock.stub(:get, "http://example.org/headers")
       .with(headers: { "Hello" => "World", "Header" => "Value"})
       .to_return(body: "Hello, World")

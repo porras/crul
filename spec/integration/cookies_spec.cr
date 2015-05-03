@@ -1,7 +1,7 @@
 require "../spec_helper"
 
 describe "Cookies" do
-  webmock_it "stores and sends the cookies" do
+  it "stores and sends the cookies" do
     WebMock.stub(:get, "example.org/cookies/set")
       .to_return(headers: {"Set-Cookie" => "k1=v1; Path=/"}, body: "Cookie set")
 
