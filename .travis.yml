@@ -1,13 +1,6 @@
-language: c
-before_install:
-  - curl http://dist.crystal-lang.org/apt/setup.sh | sudo bash
-  - sudo apt-get -q update
-install:
-  - sudo apt-get install crystal
-script:
-  - make spec
-before_deploy:
-  - make release
+language: crystal
+script: make spec
+before_deploy: make release
 deploy:
   provider: releases
   api_key:
