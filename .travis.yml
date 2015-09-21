@@ -1,5 +1,5 @@
 language: crystal
-script: make spec
+script: "shards update && make spec"
 before_deploy: make release
 deploy:
   provider: releases
@@ -9,3 +9,9 @@ deploy:
   file_glob: true
   on:
     tags: true
+sudo: required
+before_install: |
+  curl -sL https://github.com/ysbaddaden/shards/releases/latest | \
+  egrep -o '/ysbaddaden/shards/releases/download/v[0-9\.]*/shards.*linux_amd64.tar.gz' | \
+  wget --base=http://github.com/ -i - -O - | \
+  sudo tar xz -C /usr/local/bin
