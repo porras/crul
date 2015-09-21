@@ -3,8 +3,8 @@ version: 0.3.1
 
 development_dependencies:
   webmock:
-    github: porras/webmock.cr
-    branch: crystal-0.8.0
+    github: manastech/webmock.cr
+    branch: master
 
 license: MIT
 authors:

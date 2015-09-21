@@ -1,6 +1,6 @@
 version: 1.0
 shards:
   webmock:
-    github: porras/webmock.cr
-    commit: d16b6ec426f8e515c407df454a3f04ae941b0041
+    github: manastech/webmock.cr
+    commit: b94e42a1c6e36fe4ed02cff591b78eafd418b347
 
