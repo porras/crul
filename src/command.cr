@@ -33,7 +33,7 @@ module Crul
           client.close
         end
       end
-    rescue e : Errno | SocketError
+    rescue e : Errno | Socket::Error
       puts e.message
       exit -1
     end
