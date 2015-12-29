@@ -7,7 +7,7 @@ describe "Basic examples" do
     end
 
     lines.first.should match(/\AUsage:/)
-    lines[-2].should match(/Please specify URL/)
+    lines.last.should match(/Please specify URL/)
   end
 
   it "help" do
