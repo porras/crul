@@ -10,7 +10,7 @@ describe Crul::Formatters::JSON do
 
         formatter.print
 
-        JSON.parse(uncolorize(output.to_s)).should eq({"a": 1})
+        Hash(String, Int32).from_json(uncolorize(output.to_s)).should eq({"a": 1})
       end
     end
 

@@ -105,7 +105,7 @@ describe Crul::Options do
       header_value = {"a" => "b"}
       options = Crul::Options.parse("http://example.org -H JSON:#{header_value.to_json}".split(" "))
 
-      JSON.parse(options.headers["json"]).should eq(header_value)
+      Hash(String, String).from_json(options.headers["json"]).should eq(header_value)
     end
 
     it "gets user and password with --auth" do
