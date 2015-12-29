@@ -5,11 +5,11 @@ module Crul
   module Formatters
     class XML < Base
       def print
-        begin
-          printer = PrettyPrinter.new(@response.body, @output)
+        printer = PrettyPrinter.new(@response.body, @output)
+        if printer.valid_xml?
           printer.print
           @output.puts
-        rescue XML::Error
+        else
           print_plain
         end
       end
@@ -18,6 +18,15 @@ module Crul
         def initialize(@input, @output)
           @reader = XML::Reader.new(@input)
           @indent = 0
+        end
+
+        # This is a stupid way of doing this, but at some point between Crystal 0.8.0 and 0.10.0 XML::Reader stopped
+        # raising exceptions or reporting errors in the way XML.parse does. Real solution would be either 1) fix that in
+        # Crystal, or 2) make the Printer use XML.parse (not inefficient because it's not doing streaming anyway). But
+        # for the time being, this is the smallest change that fixes it
+        def valid_xml?
+          xml = ::XML.parse(@input)
+          !xml.errors
         end
 
         def print
@@ -42,7 +51,6 @@ module Crul
               end
 
               print_end_open_element empty
-
             when XML::Type::ELEMENT_DECL
               parent = current.parent
               if parent
