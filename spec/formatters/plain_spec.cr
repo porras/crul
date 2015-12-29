@@ -3,7 +3,7 @@ require "../spec_helper"
 describe Crul::Formatters::Plain do
   describe "#print" do
     it "prints" do
-      output = StringIO.new
+      output = MemoryIO.new
       response = FakeResponse.new("Hello")
       formatter = Crul::Formatters::Plain.new(output, response)
 

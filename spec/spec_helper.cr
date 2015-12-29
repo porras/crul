@@ -14,7 +14,7 @@ struct FakeResponse
 end
 
 def capture_lines(&block)
-  output = StringIO.new
+  output = MemoryIO.new
   yield(output)
   output.to_s.split("\n")
 end

@@ -4,7 +4,7 @@ describe Crul::Formatters::XML do
   describe "#print" do
     context "with valid XML" do
       it "formats it" do
-        output = StringIO.new
+        output = MemoryIO.new
         response = FakeResponse.new("<a><b>c</b></a>")
         formatter = Crul::Formatters::XML.new(output, response)
 
@@ -17,7 +17,7 @@ describe Crul::Formatters::XML do
 
     context "with malformed XML" do
       it "formats it (falling back to plain)" do
-        output = StringIO.new
+        output = MemoryIO.new
         response = FakeResponse.new("<<<")
         formatter = Crul::Formatters::XML.new(output, response)
 
