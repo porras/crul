@@ -1,5 +1,9 @@
 version: 1.0
 shards:
+  completion:
+    github: f/completion
+    commit: 4b30b526bed90f010ff9bad1f52df27dfe2a3bef
+
   webmock:
     github: manastech/webmock.cr
     commit: 0f2ee1f6918da9c1e2a2bd35e225659ca870ee7c
