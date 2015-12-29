@@ -16,7 +16,7 @@ end
 def capture_lines(&block)
   output = MemoryIO.new
   yield(output)
-  output.to_s.split("\n")
+  output.to_s.strip.split("\n")
 end
 
 Spec.before_each do
