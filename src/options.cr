@@ -21,26 +21,26 @@ module Crul
 
           parser.separator
           parser.separator "HTTP methods (default: GET):"
-          parser.on("get",    "GET",    "Use GET")    { options.method = Methods::GET    }
-          parser.on("post",   "POST",   "Use POST")   { options.method = Methods::POST   }
-          parser.on("put",    "PUT",    "Use PUT")    { options.method = Methods::PUT    }
+          parser.on("get", "GET", "Use GET") { options.method = Methods::GET }
+          parser.on("post", "POST", "Use POST") { options.method = Methods::POST }
+          parser.on("put", "PUT", "Use PUT") { options.method = Methods::PUT }
           parser.on("delete", "DELETE", "Use DELETE") { options.method = Methods::DELETE }
 
           parser.separator
           parser.separator "HTTP options:"
           parser.on("-d DATA", "--data DATA", "Request body") do |body|
             options.body = if body.starts_with?('@')
-              begin
-                File.read(body[1..-1])
-              rescue e
-                options.errors << e
-                nil
-              end
-            else
-              body
-            end
+                             begin
+                               File.read(body[1..-1])
+                             rescue e
+                               options.errors << e
+                               nil
+                             end
+                           else
+                             body
+                           end
           end
-          parser.on("-d @file", "--data @file", "Request body (read from file)") {} # previous handler
+          parser.on("-d @file", "--data @file", "Request body (read from file)") { } # previous handler
           parser.on("-H HEADER", "--header HEADER", "Set header") do |header|
             name, value = header.split(':', 2)
             options.headers[name] = value
