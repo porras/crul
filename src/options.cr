@@ -4,7 +4,7 @@ module Crul
   class Options
     property :formatter, :method, :body, :headers, :basic_auth, :cookie_store, :errors
     property! :url, :parser
-    property? :help
+    property? :help, :version
 
     def initialize
       @formatter = Formatters::Auto
@@ -69,6 +69,9 @@ module Crul
           parser.separator "Other options:"
           parser.on("-h", "--help", "Show this help") do
             options.help = true
+          end
+          parser.on("-V", "--version", "Display version") do
+            options.version = true
           end
 
           parser.unknown_args do |args|

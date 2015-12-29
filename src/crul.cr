@@ -8,6 +8,11 @@ module Crul
         return true
       end
 
+      if options.version?
+        output.puts Crul.version_string
+        return true
+      end
+
       if options.errors.any?
         output.puts options.parser
 

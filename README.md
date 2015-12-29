@@ -73,6 +73,7 @@ see [Development](#development).
 
     Other options:
         -h, --help                       Show this help
+        -V, --version                    Display version
 
 ## Examples
 
