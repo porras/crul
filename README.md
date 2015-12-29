@@ -131,8 +131,8 @@ see [Development](#development).
 
 ## Development
 
-You'll need [Crystal 0.8.0](http://crystal-lang.org/docs/installation/README.html) and
-[shards](https://github.com/ysbaddaden/shards#install) installed.
+You'll need [Crystal 0.10.0](http://crystal-lang.org/docs/installation/index.html) installed (it might work with older
+or newer versions, but that's the one that's tested).
 
 After checking out the repo (or decompressing the tarball with the source code), run `shards` to get
 the development dependencies, and `make` to run the tests and compile the source. Optionally, you

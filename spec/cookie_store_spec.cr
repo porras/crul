@@ -27,7 +27,7 @@ describe Crul::CookieStore do
 
     cookie_store.write!
 
-    JSON.parse(File.read("/tmp/cookies.json")).should eq({"example.com:80" => {"wadus" => "wadus=5"}})
+    Hash(String, Hash(String, String)).from_json(File.read("/tmp/cookies.json")).should eq({"example.com:80" => {"wadus" => "wadus=5"}})
 
     cookie_store = Crul::CookieStore.new
     cookie_store.load("/tmp/cookies.json")

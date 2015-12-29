@@ -7,7 +7,7 @@ describe "Basic examples" do
     end
 
     lines.first.should match(/\AUsage:/)
-    lines[-2].should match(/Please specify URL/)
+    lines.last.should match(/Please specify URL/)
   end
 
   it "help" do
@@ -19,7 +19,7 @@ describe "Basic examples" do
   end
 
   it "most basic GET" do
-    WebMock.stub(:get, "http://example.org/").to_return(body: "Hello", headers: { "Hello" => "World" })
+    WebMock.stub(:get, "http://example.org/").to_return(body: "Hello", headers: {"Hello" => "World"})
 
     lines = capture_lines do |output|
       Crul::CLI.run!(["http://example.org"], output).should be_true

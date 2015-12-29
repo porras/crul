@@ -24,4 +24,3 @@ module Crul
     end
   end
 end
-
