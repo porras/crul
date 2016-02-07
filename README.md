@@ -49,6 +49,12 @@ download it and unzip it somewhere in your `$PATH`.
 If you use a different distro, you'll have to build it from the source code,
 see [Development](#development).
 
+## Completion
+
+After installation, add this line to your `.bashrc` (only Bash supported at this moment):
+
+    eval "$(crul --completion)"
+
 ## Usage
 
     Usage: crul [method] URL [options]
