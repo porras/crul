@@ -79,6 +79,7 @@ After installation, add this line to your `.bashrc` (only Bash supported at this
 
     Other options:
         -h, --help                       Show this help
+        -V, --version                    Display version
 
 ## Examples
 
