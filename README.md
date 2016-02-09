@@ -16,6 +16,7 @@ early stage but it allows already basic usage.
 * Syntax highlighting of the output (JSON and XML)
 * Basic authentication
 * Cookie store
+* Bash completion of commands and options
 
 ## Planned features
 
