@@ -4,6 +4,7 @@ version: 0.3.1
 dependencies:
   completion:
     github: f/completion
+    commit: 699661968f1778a940211e4dfcb463a160ec0231
 
 development_dependencies:
   webmock:
