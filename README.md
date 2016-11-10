@@ -1,7 +1,7 @@
 # Crul [![Build Status](https://travis-ci.org/porras/crul.svg?branch=master)](https://travis-ci.org/porras/crul)
 
 Crul is a [curl](http://curl.haxx.se/) replacement, that is, it's a command line
-HTTP client. It has less features and options, but it aims to be more user
+HTTP client. It has fewer features and options, but it aims to be more user
 friendly. It's heavily inspired by
 [httpie](https://github.com/jakubroztocil/httpie).
 
