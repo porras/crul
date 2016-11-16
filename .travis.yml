@@ -1,4 +1,3 @@
 language: crystal
 crystal:
   - latest
-  - nightly
