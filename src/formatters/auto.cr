@@ -1,6 +1,8 @@
 module Crul
   module Formatters
     class Auto
+      @formatter : Base
+
       getter :formatter
 
       def initialize(output, response)
@@ -16,7 +18,9 @@ module Crul
         @formatter = formatter_class.new(output, response)
       end
 
-      delegate print, @formatter
+      def print(*args)
+        @formatter.print(*args)
+      end
     end
   end
 end

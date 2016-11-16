@@ -2,12 +2,20 @@ require "option_parser"
 
 module Crul
   class Options
-    property :formatter, :method, :body, :headers, :basic_auth, :cookie_store, :errors
+    property :format, :method, :body, :headers, :basic_auth, :cookie_store, :errors
     property! :url, :parser
     property? :help, :version
 
+    @body : String?
+    @basic_auth : Tuple(String, String)?
+    @help : Bool?
+    @version : Bool?
+    @url : URI?
+
+    @parser : OptionParser?
+
     def initialize
-      @formatter = Formatters::Auto
+      @format = Format::Auto
       @method = Methods::GET
       @headers = HTTP::Headers.new
       @cookie_store = CookieStore.new
@@ -56,13 +64,13 @@ module Crul
           parser.separator
           parser.separator "Response formats (default: autodetect):"
           parser.on("-j", "--json", "Format response as JSON") do |method|
-            options.formatter = Formatters::JSON
+            options.format = Format::JSON
           end
           parser.on("-x", "--xml", "Format response as XML") do |method|
-            options.formatter = Formatters::XML
+            options.format = Format::XML
           end
           parser.on("-p", "--plain", "Format response as plain text") do |method|
-            options.formatter = Formatters::Plain
+            options.format = Format::Plain
           end
 
           parser.separator
