@@ -15,8 +15,8 @@ module Crul
       end
 
       class PrettyPrinter
-        def initialize(@input, @output)
-          @reader = XML::Reader.new(@input)
+        def initialize(@input : IO | String, @output : IO)
+          @reader = ::XML::Reader.new(@input)
           @indent = 0
         end
 
@@ -34,9 +34,9 @@ module Crul
 
           while @reader.read
             case @reader.node_type
-            when XML::Type::ELEMENT_NODE
+            when ::XML::Type::ELEMENT_NODE
               elem = Element.new(@reader.name, current)
-              empty = @reader.is_empty_element?
+              empty = @reader.empty_element?
               current = elem unless empty
 
               print_start_open_element elem.name
@@ -51,7 +51,7 @@ module Crul
               end
 
               print_end_open_element empty
-            when XML::Type::ELEMENT_DECL
+            when ::XML::Type::ELEMENT_DECL
               parent = current.parent
               if parent
                 print_close_element current.name
@@ -59,9 +59,9 @@ module Crul
               else
                 raise "Invalid end element"
               end
-            when XML::Type::TEXT_NODE
+            when ::XML::Type::TEXT_NODE
               print_text @reader.value
-            when XML::Type::COMMENT_NODE
+            when ::XML::Type::COMMENT_NODE
               print_comment @reader.value
             end
           end
@@ -115,7 +115,7 @@ module Crul
         class Element
           getter :name, :parent
 
-          def initialize(@name = nil, @parent = nil)
+          def initialize(@name : String? = nil, @parent : Element? = nil)
           end
         end
       end

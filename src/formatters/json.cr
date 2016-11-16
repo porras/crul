@@ -1,4 +1,5 @@
 require "json"
+require "json/pull_parser"
 require "colorize"
 
 module Crul
@@ -9,15 +10,18 @@ module Crul
           printer = PrettyPrinter.new(@response.body, @output)
           printer.print
           @output.puts
-        rescue JSON::ParseException
+        rescue ::JSON::ParseException
           print_plain
         end
       end
 
-      # taken verbatim from https://github.com/manastech/crystal/blob/2aeb8a0f49e604cf782075380ebd9d51b838fc22/samples/pretty_json.cr
+      # taken almost verbatim from https://github.com/crystal-lang/crystal/blob/c551b35cb170893ad5454db0122dc28789d40bef/samples/pretty_json.cr
+      # needed changes:
+      #  * @input is IO | String instead of IO
+      #  * JSON constant needs to be “rooted” (::JSON)
       class PrettyPrinter
-        def initialize(@input, @output)
-          @pull = JSON::PullParser.new(@input)
+        def initialize(@input : IO | String, @output : IO)
+          @pull = ::JSON::PullParser.new @input
           @indent = 0
         end
 
@@ -57,38 +61,32 @@ module Crul
         end
 
         def read_array
-          print "["
+          print "[\n"
           @indent += 1
           i = 0
-          @pull.read_array do |obj|
+          @pull.read_array do
             if i > 0
               print ','
               print '\n' if @indent > 0
-            else
-              print '\n'
             end
             print_indent
             read_any
             i += 1
           end
           @indent -= 1
-          if i > 0
-            print '\n'
-            print_indent
-          end
+          print '\n'
+          print_indent
           print ']'
         end
 
         def read_object
-          print "{"
+          print "{\n"
           @indent += 1
           i = 0
           @pull.read_object do |key|
             if i > 0
               print ','
               print '\n' if @indent > 0
-            else
-              print '\n'
             end
             print_indent
             with_color.cyan.surround(@output) do
@@ -99,10 +97,8 @@ module Crul
             i += 1
           end
           @indent -= 1
-          if i > 0
-            print '\n'
-            print_indent
-          end
+          print '\n'
+          print_indent
           print '}'
         end
 

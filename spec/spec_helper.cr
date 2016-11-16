@@ -13,6 +13,11 @@ struct FakeResponse
   end
 end
 
+abstract class Crul::Formatters::Base
+  def initialize(@output : IO, @response : FakeResponse)
+  end
+end
+
 def capture_lines(&block)
   output = MemoryIO.new
   yield(output)

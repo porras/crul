@@ -1,5 +1,9 @@
+require "json"
+
 module Crul
   class CookieStore
+    @filename : String?
+
     getter :filename
 
     alias Cookies = Hash(String, Hash(String, String))
@@ -13,8 +17,8 @@ module Crul
     end
 
     def add_to_headers(host, port, headers)
-      if cookies = cookies["#{host}:#{port}"]?
-        cookies.each do |name, cookie|
+      if cookies_for_host = cookies["#{host}:#{port}"]?
+        cookies_for_host.each do |name, cookie|
           headers["Cookie"] = cookie
         end
       end

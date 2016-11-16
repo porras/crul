@@ -8,7 +8,7 @@ describe Crul::Options do
       options.method.should eq(Crul::Methods::GET)
       options.url.should be_a(URI)
       options.url.to_s.should eq("http://example.org")
-      options.formatter.should eq(Crul::Formatters::JSON)
+      options.format.should eq(Crul::Format::JSON)
       options.basic_auth.should eq(nil)
       options.cookie_store.filename.should eq(nil)
     end
@@ -19,7 +19,7 @@ describe Crul::Options do
       options.method.should eq(Crul::Methods::POST)
       options.url.should be_a(URI)
       options.url.to_s.should eq("http://example.org")
-      options.formatter.should eq(Crul::Formatters::JSON)
+      options.format.should eq(Crul::Format::JSON)
     end
 
     it "defaults to auto formatter" do
@@ -28,7 +28,7 @@ describe Crul::Options do
       options.method.should eq(Crul::Methods::GET)
       options.url.should be_a(URI)
       options.url.to_s.should eq("http://example.org")
-      options.formatter.should eq(Crul::Formatters::Auto)
+      options.format.should eq(Crul::Format::Auto)
     end
 
     it "defaults to GET" do
@@ -37,7 +37,7 @@ describe Crul::Options do
       options.method.should eq(Crul::Methods::GET)
       options.url.should be_a(URI)
       options.url.to_s.should eq("http://example.org")
-      options.formatter.should eq(Crul::Formatters::JSON)
+      options.format.should eq(Crul::Format::JSON)
     end
 
     it "GET with XML" do
@@ -46,7 +46,7 @@ describe Crul::Options do
       options.method.should eq(Crul::Methods::GET)
       options.url.should be_a(URI)
       options.url.to_s.should eq("http://example.org")
-      options.formatter.should eq(Crul::Formatters::XML)
+      options.format.should eq(Crul::Format::XML)
     end
 
     it "GET with plain" do
@@ -55,7 +55,7 @@ describe Crul::Options do
       options.method.should eq(Crul::Methods::GET)
       options.url.should be_a(URI)
       options.url.to_s.should eq("http://example.org")
-      options.formatter.should eq(Crul::Formatters::Plain)
+      options.format.should eq(Crul::Format::Plain)
     end
 
     it "most basic" do
@@ -64,7 +64,7 @@ describe Crul::Options do
       options.method.should eq(Crul::Methods::GET)
       options.url.should be_a(URI)
       options.url.to_s.should eq("http://example.org")
-      options.formatter.should eq(Crul::Formatters::Auto)
+      options.format.should eq(Crul::Format::Auto)
     end
 
     it "without protocol" do

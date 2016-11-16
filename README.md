@@ -139,7 +139,7 @@ After installation, add this line to your `.bashrc` (only Bash supported at this
 
 ## Development
 
-You'll need [Crystal 0.10.0](http://crystal-lang.org/docs/installation/index.html) installed (it might work with older
+You'll need [Crystal 0.19](http://crystal-lang.org/docs/installation/index.html) installed (it might work with older
 or newer versions, but that's the one that's tested).
 
 After checking out the repo (or decompressing the tarball with the source code), run `shards` to get
@@ -160,5 +160,5 @@ You can also contribute by trying it and reporting any
 
 ## Copyright
 
-Copyright (c) 2015 Sergio Gil. See
+Copyright (c) 2015-2016 Sergio Gil. See
 [LICENSE](https://github.com/porras/crul/blob/master/LICENSE.txt) for details.

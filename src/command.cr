@@ -3,7 +3,10 @@ require "colorize"
 
 module Crul
   class Command
-    def initialize(@output, @options)
+    @host : String
+    @port : Int32
+
+    def initialize(@output : IO, @options : Options)
       @host = @options.url.host.not_nil!
       @port = @options.url.port || default_port
     end
@@ -49,7 +52,7 @@ module Crul
         end
       end
       @output.puts
-      @options.formatter.new(@output, response).print
+      Formatters.new(@options.format, @output, response).print
     end
 
     private def default_port
