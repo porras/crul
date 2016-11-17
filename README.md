@@ -43,7 +43,7 @@ TODO: Create binary packages for easy installation. Help welcome!
 
 ### From source
 
-If there are no binary packages for your OS version, you can install `crul` building it from source. See
+If there are no binary packages for your OS version, you can install `crul` [downloading the zip or tarball](https://github.com/porras/crul/releases/latest) and building it from source. See
 [Development](#development) for instructions.
 
 ## Completion
