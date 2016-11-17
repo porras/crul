@@ -7,7 +7,7 @@
   * In `shard.yml`, update the version
 1. Run `shards`
 1. Run the specs locally
-1. Add the tag: `git tag X.Y.Z`
+1. Add the tag: `git tag vX.Y.Z`
 1. Push: `git push origin master --tags`
 1. Make sure [master build](https://travis-ci.org/porras/crul) is green again
 1. [Draft a new release](https://github.com/porras/crul/releases/new)

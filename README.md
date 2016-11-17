@@ -32,29 +32,27 @@ early stage but it allows already basic usage.
     brew tap porras/crul
     brew install crul
 
-Or, if you prefer, download [the latest release](https://github.com/porras/crul/releases)
-and unzip it somewhere in your `$PATH`.
+Or, if you want to install the latest, unreleased version:
+
+    $ brew tap porras/tap
+    $ brew install crul --HEAD
 
 ### Linux
 
-[The latest release](https://github.com/porras/crul/releases) includes a Linux 64
-bits binary that reportedly works on:
+TODO: Create binary packages for easy installation. Help welcome!
 
-* Ubuntu 12.04 LTS
-* Ubuntu 14.04
-* Debian testing
+### From source
 
-If you're a user of those distros (or a different one and want to help trying),
-download it and unzip it somewhere in your `$PATH`.
-
-If you use a different distro, you'll have to build it from the source code,
-see [Development](#development).
+If there are no binary packages for your OS version, you can install `crul` building it from source. See
+[Development](#development) for instructions.
 
 ## Completion
 
 After installation, add this line to your `.bashrc` (only Bash supported at this moment):
 
     eval "$(crul --completion)"
+
+You don't need this if you installed via Homebrew (it's automatic).
 
 ## Usage
 
