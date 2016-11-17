@@ -2,7 +2,12 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## [Unreleased](https://github.com/porras/crul/compare/0.4.0...HEAD)
+## [Unreleased](https://github.com/porras/crul/compare/0.4.1...HEAD)
+
+## [0.4.1](https://github.com/porras/crul/compare/0.4.0...0.4.1)
+### Fixed
+- Bug on formatting floats ([#18](https://github.com/porras/crul/issues/18))
+
 ### Added
 - This CHANGELOG and RELEASE process
 
