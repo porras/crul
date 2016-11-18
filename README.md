@@ -39,7 +39,7 @@ Or, if you want to install the latest, unreleased version:
 
 ### Linux
 
-TODO: Create binary packages for easy installation. Help welcome!
+You can find a package for Ubuntu 16.04 in the [downloads section of the latest release](https://github.com/porras/crul/releases/latest).
 
 ### From source
 
