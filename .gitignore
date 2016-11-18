@@ -6,3 +6,4 @@ release
 *.zip
 libs
 .shards
+build/

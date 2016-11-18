@@ -1,0 +1,27 @@
+#!/bin/sh
+
+set -e
+
+rm -rf build
+
+docker build -t crul.ubuntu -f Dockerfile.ubuntu .
+docker build -t crul.fpm -f Dockerfile.fpm .
+
+mkdir -p build/ubuntu
+docker run -v $PWD/build:/build -w /src -e "PREFIX=/build/ubuntu/usr" crul.ubuntu make install
+docker run -v $PWD/build:/build -w /build crul.fpm \
+  fpm \
+    --input-type dir \
+    --output-type deb \
+    --name crul \
+    --version 0.4.1 \
+    --chdir /build/ubuntu \
+    --depends libxml2 \
+    --depends libssl1.0.0 \
+    --package crul_VERSION_ARCH.deb \
+    --license MIT \
+    --category web \
+    --maintainer "Sergio Gil <sgilperez@gmail.com>" \
+    --url https://github.com/porras/crul \
+    --description "Crul is a curl replacement, that is, it's a command line HTTP client. It has fewer features and options, but it aims to be more user friendly. It's heavily inspired by httpie." \
+    usr/bin

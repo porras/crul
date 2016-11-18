@@ -1,6 +1,7 @@
 all: crul
 
 crul: crul.cr src/**/*.cr
+	shards
 	crystal build --release crul.cr
 	@du -sh crul
 

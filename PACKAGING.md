@@ -23,3 +23,8 @@
 1. Upload the generated `tar.gz` to the release and copy its download URL
 1. Copy the generated snippet into `brew edit crul` and add a `root_url` line with the copied URL **minus the filename**
 1. Check it by uninstalling and installing again (no flags)
+
+# How to build and release Ubuntu package
+
+1. Run `./release.linux` (requires Docker, and probably a fast internet connection 😁)
+1. Upload the generated `build/whatever.deb` to the release

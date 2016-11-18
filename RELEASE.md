@@ -16,4 +16,4 @@
   * Description: Should include the relevant part of the `CHANGELOG` and a link to installation instructions (see [example](https://github.com/porras/crul/releases/tag/0.4.1))
 1. Publish it!
 
-See `BREW.md` on how to update Homebrew recipe
+See `PACKAGING.md` on how to release source and binary packages.
