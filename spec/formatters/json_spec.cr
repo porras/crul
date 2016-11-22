@@ -4,7 +4,7 @@ describe Crul::Formatters::JSON do
   describe "#print" do
     context "with valid JSON" do
       it "formats it" do
-        output = MemoryIO.new
+        output = IO::Memory.new
         response = FakeResponse.new("{\"a\":1}")
         formatter = Crul::Formatters::JSON.new(output, response)
 
@@ -16,7 +16,7 @@ describe Crul::Formatters::JSON do
 
     context "with invalid JSON" do
       it "formats it (falling back to plain)" do
-        output = MemoryIO.new
+        output = IO::Memory.new
         response = FakeResponse.new("{{{")
         formatter = Crul::Formatters::JSON.new(output, response)
 

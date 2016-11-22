@@ -3,7 +3,7 @@ require "../spec_helper"
 describe Crul::Formatters::Auto do
   describe "#formatter" do
     it "detects JSON" do
-      output = MemoryIO.new
+      output = IO::Memory.new
       response = FakeResponse.new(content_type: "application/json")
       formatter = Crul::Formatters::Auto.new(output, response)
 
@@ -11,7 +11,7 @@ describe Crul::Formatters::Auto do
     end
 
     it "detects XML" do
-      output = MemoryIO.new
+      output = IO::Memory.new
       response = FakeResponse.new(content_type: "application/xml")
       formatter = Crul::Formatters::Auto.new(output, response)
 
@@ -19,7 +19,7 @@ describe Crul::Formatters::Auto do
     end
 
     it "defaults to plain" do
-      output = MemoryIO.new
+      output = IO::Memory.new
       response = FakeResponse.new(content_type: "text/csv")
       formatter = Crul::Formatters::Auto.new(output, response)
 
@@ -27,7 +27,7 @@ describe Crul::Formatters::Auto do
     end
 
     it "works without a header" do
-      output = MemoryIO.new
+      output = IO::Memory.new
       response = FakeResponse.new
       formatter = Crul::Formatters::Auto.new(output, response)
 
@@ -35,7 +35,7 @@ describe Crul::Formatters::Auto do
     end
 
     it "works with an encoding" do
-      output = MemoryIO.new
+      output = IO::Memory.new
       response = FakeResponse.new(content_type: "application/xml; charset=ISO-8859-1")
       formatter = Crul::Formatters::Auto.new(output, response)
 
