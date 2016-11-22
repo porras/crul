@@ -27,4 +27,4 @@
 # How to build and release Ubuntu package
 
 1. Run `./release.linux` (requires Docker, and probably a fast internet connection 😁)
-1. Upload the generated `build/whatever.deb` to the release
+1. Add the generated `build/whatever.deb` to the deb repository
