@@ -19,7 +19,7 @@ abstract class Crul::Formatters::Base
 end
 
 def capture_lines(&block)
-  output = MemoryIO.new
+  output = IO::Memory.new
   yield(output)
   output.to_s.strip.split("\n")
 end
