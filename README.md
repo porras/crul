@@ -44,7 +44,7 @@ Or, if you want to install the latest, unreleased version:
 There is an APT repository with signed packages of the latest crul version. To setup this repo and install crul, run the following commands (as root or with sudo):
 
     apt-key adv --keyserver keys.gnupg.net --recv-keys ED2715FE
-    echo "deb http://iamserg.io/deb packages main" >> /etc/apt/sources.list.d/iamserg.io.list
+    echo "deb http://iamserg.io/deb packages main" > /etc/apt/sources.list.d/iamserg.io.list
     apt-get update
     apt-get install crul
 
