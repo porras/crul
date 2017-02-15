@@ -30,6 +30,18 @@ describe "Basic examples" do
     lines.last.should eq("Hello")
   end
 
+  it "colorizes output" do
+    WebMock.stub(:get, "http://example.org/").to_return(body: "Hello", headers: {"Hello" => "World"})
+
+    lines = capture_lines(uncolorize?: false) do |output|
+      Crul::CLI.run!(["http://example.org"], output).should be_true
+    end
+
+    lines.first.should eq("\e[94mHTTP/1.1\e[0m\e[36m 200 \e[0m\e[33mOK")
+    lines[2].should eq("\e[0mHello: \e[36mWorld")
+    lines.last.should eq("Hello")
+  end
+
   it "most basic GET with https" do
     WebMock.stub(:get, "https://example.org/").to_return(body: "Hello")
 
