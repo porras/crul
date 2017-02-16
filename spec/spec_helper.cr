@@ -18,10 +18,12 @@ abstract class Crul::Formatters::Base
   end
 end
 
-def capture_lines(&block)
+def capture_lines(uncolorize? = true, &block)
   output = IO::Memory.new
   yield(output)
-  output.to_s.strip.split("\n")
+  string = output.to_s
+  string = uncolorize(string) if uncolorize?
+  string.strip.split("\n")
 end
 
 Spec.before_each do

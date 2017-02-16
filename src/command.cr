@@ -42,13 +42,13 @@ module Crul
     end
 
     private def print_response(response)
-      with_color.light_blue.surround { @output << response.version }
-      with_color.cyan.surround { @output << " #{response.status_code} " }
-      with_color.yellow.surround { @output.puts response.status_message }
+      with_color.light_blue.surround(@output) { |io| io << response.version }
+      with_color.cyan.surround(@output) { |io| io << " #{response.status_code} " }
+      with_color.yellow.surround(@output) { |io| io.puts response.status_message }
       response.headers.each do |name, values|
         values.each do |value|
           @output << "#{name}: "
-          with_color.cyan.surround { @output.puts value }
+          with_color.cyan.surround(@output) { |io| io.puts value }
         end
       end
       @output.puts
