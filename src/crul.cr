@@ -4,7 +4,7 @@ module Crul
       options = Options.parse(argv)
 
       if options.help?
-        output.puts options.parser
+        output.puts Options::USAGE
         return true
       end
 
@@ -14,7 +14,7 @@ module Crul
       end
 
       if options.errors.any?
-        output.puts options.parser
+        output.puts Options::USAGE
 
         output.puts "Errors:"
         options.errors.each do |error|
