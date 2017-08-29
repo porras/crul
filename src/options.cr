@@ -22,19 +22,52 @@ module Crul
       @errors = [] of Exception
     end
 
+    USAGE = <<-USAGE
+      Usage: crul [method] URL [options]
+
+      HTTP methods (default: GET):
+        get, GET                         Use GET
+        post, POST                       Use POST
+        put, PUT                         Use PUT
+        delete, DELETE                   Use DELETE
+
+      HTTP options:
+        -d DATA, --data DATA             Request body
+        -d @file, --data @file           Request body (read from file)
+        -H HEADER, --header HEADER       Set header
+        -a USER:PASS, --auth USER:PASS   Basic auth
+        -c FILE, --cookies FILE          Use FILE as cookie store (reads and writes)
+
+      Response formats (default: autodetect):
+        -j, --json                       Format response as JSON
+        -x, --xml                        Format response as XML
+        -p, --plain                      Format response as plain text
+
+      Other options:
+        -h, --help                       Show this help
+        -V, --version                    Display version
+    USAGE
+
     def self.parse(args)
       new.tap do |options|
+        case args.first?
+        when "get", "GET"
+          args.shift
+          options.method = Methods::GET
+        when "post", "POST"
+          args.shift
+          options.method = Methods::POST
+        when "put", "PUT"
+          args.shift
+          options.method = Methods::PUT
+        when "delete", "DELETE"
+          args.shift
+          options.method = Methods::DELETE
+        else # it's the default
+          options.method = Methods::GET
+        end
+
         options.parser = OptionParser.parse(args) do |parser|
-          parser.banner = "Usage: crul [method] URL [options]"
-
-          parser.separator
-          parser.separator "HTTP methods (default: GET):"
-          parser.on("get", "GET", "Use GET") { options.method = Methods::GET }
-          parser.on("post", "POST", "Use POST") { options.method = Methods::POST }
-          parser.on("put", "PUT", "Use PUT") { options.method = Methods::PUT }
-          parser.on("delete", "DELETE", "Use DELETE") { options.method = Methods::DELETE }
-
-          parser.separator
           parser.separator "HTTP options:"
           parser.on("-d DATA", "--data DATA", "Request body") do |body|
             options.body = if body.starts_with?('@')
