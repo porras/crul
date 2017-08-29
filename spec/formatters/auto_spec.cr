@@ -10,6 +10,14 @@ describe Crul::Formatters::Auto do
       formatter.formatter.should be_a(Crul::Formatters::JSON)
     end
 
+    it "detects JSONAPI" do
+      output = IO::Memory.new
+      response = FakeResponse.new(content_type: "application/vnd.api+json")
+      formatter = Crul::Formatters::Auto.new(output, response)
+
+      formatter.formatter.should be_a(Crul::Formatters::JSON)
+    end
+
     it "detects XML" do
       output = IO::Memory.new
       response = FakeResponse.new(content_type: "application/xml")

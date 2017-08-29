@@ -3,6 +3,9 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased](https://github.com/porras/crul/compare/0.4.1...HEAD)
+### Added
+- Autodetect JSON API format([#24](https://github.com/porras/crul/pull/24), thanks [nilsding](https://github.com/nilsding))
+
 ### Fixed
 - Bug on colorizing output ([#22](https://github.com/porras/crul/pull/22), thanks [straight-shoota](https://github.com/straight-shoota))
 
