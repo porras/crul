@@ -6,6 +6,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Fixed
 - Bug on colorizing output ([#22](https://github.com/porras/crul/pull/22), thanks [straight-shoota](https://github.com/straight-shoota))
 
+### Other
+- Crystal 0.23 compatibility ([#24](https://github.com/porras/crul/pull/24)
+
 ## [0.4.1](https://github.com/porras/crul/compare/0.4.0...0.4.1)
 ### Fixed
 - Bug on formatting floats ([#18](https://github.com/porras/crul/issues/18))
