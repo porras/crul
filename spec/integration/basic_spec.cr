@@ -26,7 +26,7 @@ describe "Basic examples" do
     end
 
     lines.first.should eq("HTTP/1.1 200 OK")
-    lines[2].should eq("Hello: World")
+    lines.should contain("Hello: World")
     lines.last.should eq("Hello")
   end
 
@@ -38,7 +38,7 @@ describe "Basic examples" do
     end
 
     lines.first.should eq("\e[94mHTTP/1.1\e[0m\e[36m 200 \e[0m\e[33mOK")
-    lines[2].should eq("\e[0mHello: \e[36mWorld")
+    lines.should contain("\e[0mHello: \e[36mWorld")
     lines.last.should eq("Hello")
   end
 
