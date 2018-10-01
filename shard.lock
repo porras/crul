@@ -6,5 +6,5 @@ shards:
 
   webmock:
     github: manastech/webmock.cr
-    commit: c673f393a31eac2734c7599897357ef1f3f24011
+    commit: ca7c79ab3cc8b4c56cb1d70ba7a6952dc35ef8f6
 
