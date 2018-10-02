@@ -101,6 +101,12 @@ describe Crul::Options do
       options.headers["Header2"].should eq("value2")
     end
 
+    it "checks a value was passed for the header" do
+      options = Crul::Options.parse("http://example.org -H".split(" "))
+      options.errors.empty?.should_not be_true
+      options.errors.first.message.should eq("The -H option has no value.")
+    end
+
     it "accepts headers with JSON values" do
       header_value = {"a" => "b"}
       options = Crul::Options.parse("http://example.org -H JSON:#{header_value.to_json}".split(" "))

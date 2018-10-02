@@ -122,6 +122,8 @@ module Crul
 
         options.help = parsed.help?
         options.version = parsed.version?
+      rescue e : Optarg::MissingValue
+        options.errors << Exception.new(e.message)
       end
     end
 
