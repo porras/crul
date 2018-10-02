@@ -1,4 +1,5 @@
-require "option_parser"
+require "optarg"
+require "uri"
 
 module Crul
   class Options
@@ -12,7 +13,22 @@ module Crul
     @version : Bool?
     @url : URI?
 
-    @parser : OptionParser?
+    class Parser < Optarg::Model
+      arg "method", complete: %w(get put post delete GET PUT POST DELETE)
+      arg "url", complete: %w(http:// https://)
+
+      string %w(-d --data)
+      array %w(-H --header)
+      string %w(-a --auth)
+      string %w(-c --cookies)
+
+      bool %w(-j --json)
+      bool %w(-x --xml)
+      bool %w(-p --plain)
+
+      bool %w(-h --help), stop: true
+      bool %w(-V --version), stop: true
+    end
 
     def initialize
       @format = Format::Auto
@@ -50,81 +66,62 @@ module Crul
 
     def self.parse(args)
       new.tap do |options|
-        case args.first?
-        when "get", "GET"
-          args.shift
-          options.method = Methods::GET
-        when "post", "POST"
-          args.shift
-          options.method = Methods::POST
-        when "put", "PUT"
-          args.shift
-          options.method = Methods::PUT
-        when "delete", "DELETE"
-          args.shift
-          options.method = Methods::DELETE
-        else # it's the default
-          options.method = Methods::GET
+        parsed = Parser.parse(args)
+
+        method, url = parsed.method?, parsed.url?
+        # if only one is present, it's treated as a URL
+        if method && !url
+          method, url = url, method
         end
 
-        options.parser = OptionParser.parse(args) do |parser|
-          parser.separator "HTTP options:"
-          parser.on("-d DATA", "--data DATA", "Request body") do |body|
-            options.body = if body.starts_with?('@')
-                             begin
-                               File.read(body[1..-1])
-                             rescue e
-                               options.errors << e
-                               nil
-                             end
-                           else
-                             body
+        options.method = case method
+                         when "post", "POST"
+                           Methods::POST
+                         when "put", "PUT"
+                           Methods::PUT
+                         when "delete", "DELETE"
+                           Methods::DELETE
+                         else # GET is the default
+                           Methods::GET
+                         end
+
+        if url
+          options.url = parse_uri(url)
+        else
+          options.errors << Exception.new("Please specify URL")
+        end
+
+        if parsed.data?
+          options.body = if parsed.data.starts_with?('@')
+                           begin
+                             File.read(parsed.data[1..-1])
+                           rescue e
+                             options.errors << e
+                             nil
                            end
-          end
-          parser.on("-d @file", "--data @file", "Request body (read from file)") { } # previous handler
-          parser.on("-H HEADER", "--header HEADER", "Set header") do |header|
-            name, value = header.split(':', 2)
-            options.headers[name] = value
-          end
-          parser.on("-a USER:PASS", "--auth USER:PASS", "Basic auth") do |user_pass|
-            pieces = user_pass.split(':', 2)
-            options.basic_auth = {pieces[0], pieces[1]? || ""}
-          end
-          parser.on("-c FILE", "--cookies FILE", "Use FILE as cookie store (reads and writes)") do |file|
-            options.cookie_store.load(file)
-          end
-
-          parser.separator
-          parser.separator "Response formats (default: autodetect):"
-          parser.on("-j", "--json", "Format response as JSON") do |method|
-            options.format = Format::JSON
-          end
-          parser.on("-x", "--xml", "Format response as XML") do |method|
-            options.format = Format::XML
-          end
-          parser.on("-p", "--plain", "Format response as plain text") do |method|
-            options.format = Format::Plain
-          end
-
-          parser.separator
-          parser.separator "Other options:"
-          parser.on("-h", "--help", "Show this help") do
-            options.help = true
-          end
-          parser.on("-V", "--version", "Display version") do
-            options.version = true
-          end
-
-          parser.unknown_args do |args|
-            if args.empty?
-              options.errors << Exception.new("Please specify URL")
-            else
-              options.url = parse_uri(args.first)
-            end
-          end
-
-          parser.separator
+                         else
+                           parsed.data
+                         end
         end
+
+        parsed.header.each do |h|
+          name, value = h.split(':', 2)
+          options.headers[name] = value
+        end
+
+        if parsed.auth?
+          pieces = parsed.auth.split(':', 2)
+          options.basic_auth = {pieces[0], pieces[1]? || ""}
+        end
+
+        options.cookie_store.load(parsed.cookies) if parsed.cookies?
+
+        options.format = Format::JSON if parsed.json?
+        options.format = Format::XML if parsed.xml?
+        options.format = Format::Plain if parsed.plain?
+
+        options.help = parsed.help?
+        options.version = parsed.version?
       end
     end
 

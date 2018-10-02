@@ -1,8 +1,16 @@
 version: 1.0
 shards:
-  completion:
-    github: porras/completion
-    commit: a1d7d1f62e7b274a376a6f180c0f49fb0dade295
+  callback:
+    github: mosop/callback
+    version: 0.6.3
+
+  optarg:
+    github: porras/optarg
+    commit: 41c06ac5533c02bab3eaed8cb1e5275e4887dd42
+
+  string_inflection:
+    github: mosop/string_inflection
+    version: 0.2.1
 
   webmock:
     github: manastech/webmock.cr

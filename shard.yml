@@ -2,9 +2,9 @@ name: crul
 version: 0.4.2
 
 dependencies:
-  completion:
-    github: porras/completion
-    branch: crystal-0.19
+  optarg:
+    github: porras/optarg
+    branch: master
 
 development_dependencies:
   webmock:
