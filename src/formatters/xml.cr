@@ -34,7 +34,7 @@ module Crul
 
           while @reader.read
             case @reader.node_type
-            when ::XML::Type::ELEMENT_NODE
+            when ::XML::Reader::Type::ELEMENT
               elem = Element.new(@reader.name, current)
               empty = @reader.empty_element?
               current = elem unless empty
@@ -51,7 +51,7 @@ module Crul
               end
 
               print_end_open_element empty
-            when ::XML::Type::ELEMENT_DECL
+            when ::XML::Reader::Type::END_ELEMENT
               parent = current.parent
               if parent
                 print_close_element current.name
@@ -59,9 +59,9 @@ module Crul
               else
                 raise "Invalid end element"
               end
-            when ::XML::Type::TEXT_NODE
+            when ::XML::Reader::Type::TEXT
               print_text @reader.value
-            when ::XML::Type::COMMENT_NODE
+            when ::XML::Reader::Type::COMMENT
               print_comment @reader.value
             end
           end
