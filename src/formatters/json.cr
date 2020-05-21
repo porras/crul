@@ -32,23 +32,23 @@ module Crul
         def read_any
           case @pull.kind
           when .null?
-            with_color.bold.surround(@output) do
+            Colorize.with.bold.surround(@output) do
               @pull.read_null.to_json(@output)
             end
           when .bool?
-            with_color.light_blue.surround(@output) do
+            Colorize.with.light_blue.surround(@output) do
               @pull.read_bool.to_json(@output)
             end
           when .int?
-            with_color.red.surround(@output) do
+            Colorize.with.red.surround(@output) do
               @pull.read_int.to_json(@output)
             end
           when .float?
-            with_color.red.surround(@output) do
+            Colorize.with.red.surround(@output) do
               @pull.read_float.to_json(@output)
             end
           when .string?
-            with_color.yellow.surround(@output) do
+            Colorize.with.yellow.surround(@output) do
               @pull.read_string.to_json(@output)
             end
           when .begin_array?
@@ -91,7 +91,7 @@ module Crul
               print '\n' if @indent > 0
             end
             print_indent
-            with_color.cyan.surround(@output) do
+            Colorize.with.cyan.surround(@output) do
               key.to_json(@output)
             end
             print ": "
