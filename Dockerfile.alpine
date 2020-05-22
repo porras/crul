@@ -1,0 +1,13 @@
+FROM crystallang/crystal:0.34.0-alpine
+
+ADD crul.cr /src/
+ADD src /src/src
+ADD shard.* /src/
+ADD Makefile /src/
+
+WORKDIR /src
+
+RUN make
+
+# delete binary if present (it's a darwin one probably)
+RUN rm -f crul
