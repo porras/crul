@@ -36,19 +36,19 @@ module Crul
           client.close
         end
       end
-    rescue e : Errno | Socket::Error
+    rescue e : IO::TimeoutError | Socket::Error
       puts e.message
       exit -1
     end
 
     private def print_response(response)
-      with_color.light_blue.surround(@output) { |io| io << response.version }
-      with_color.cyan.surround(@output) { |io| io << " #{response.status_code} " }
-      with_color.yellow.surround(@output) { |io| io.puts response.status_message }
+      Colorize.with.light_blue.surround(@output) { |io| io << response.version }
+      Colorize.with.cyan.surround(@output) { |io| io << " #{response.status_code} " }
+      Colorize.with.yellow.surround(@output) { |io| io.puts response.status_message }
       response.headers.each do |name, values|
         values.each do |value|
           @output << "#{name}: "
-          with_color.cyan.surround(@output) { |io| io.puts value }
+          Colorize.with.cyan.surround(@output) { |io| io.puts value }
         end
       end
       @output.puts

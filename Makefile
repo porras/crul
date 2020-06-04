@@ -2,7 +2,8 @@ all: crul
 
 crul: crul.cr src/**/*.cr
 	shards
-	crystal build --release crul.cr
+	crystal build --release --no-debug --static --link-flags "-lxml2 -llzma" crul.cr
+	@strip crul
 	@du -sh crul
 
 clean:

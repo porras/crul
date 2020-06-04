@@ -2,22 +2,24 @@
 
 set -e
 
+alias docker=podman
+
 rm -rf build
 
-docker build -t crul.ubuntu -f Dockerfile.ubuntu .
+docker build -t crul.alpine -f Dockerfile.alpine .
 docker build -t crul.fpm -f Dockerfile.fpm .
 
-mkdir -p build/ubuntu
-docker run -v $PWD/build:/build -w /src -e "PREFIX=/build/ubuntu/usr" crul.ubuntu make install
+mkdir -p build
+
+docker run -v $PWD/build:/build -w /src -e "PREFIX=/build/usr" crul.alpine make install
+
 docker run -v $PWD/build:/build -w /build crul.fpm \
   fpm \
     --input-type dir \
     --output-type deb \
     --name crul \
     --version 0.4.1 \
-    --chdir /build/ubuntu \
-    --depends libxml2 \
-    --depends libssl1.0.0 \
+    --chdir /build \
     --package crul_VERSION_ARCH.deb \
     --license MIT \
     --category web \

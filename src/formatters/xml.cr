@@ -68,13 +68,13 @@ module Crul
         end
 
         private def print_start_open_element(name)
-          with_color.cyan.surround(@output) do
+          Colorize.with.cyan.surround(@output) do
             @output << "#{"  " * @indent}<#{name}"
           end
         end
 
         private def print_end_open_element(empty)
-          with_color.cyan.surround(@output) do
+          Colorize.with.cyan.surround(@output) do
             if empty
               @output << "/>\n"
             else
@@ -86,28 +86,28 @@ module Crul
 
         private def print_close_element(name)
           @indent -= 1
-          with_color.cyan.surround(@output) do
+          Colorize.with.cyan.surround(@output) do
             @output << "#{"  " * @indent}</#{name}>\n"
           end
         end
 
         private def print_attribute(name, value)
-          with_color.cyan.surround(@output) do
+          Colorize.with.cyan.surround(@output) do
             @output << " #{name}="
           end
-          with_color.yellow.surround(@output) do
+          Colorize.with.yellow.surround(@output) do
             @output << "\"#{value}\""
           end
         end
 
         private def print_text(text)
-          with_color.yellow.surround(@output) do
+          Colorize.with.yellow.surround(@output) do
             @output << "#{"  " * @indent}#{text.strip}\n"
           end
         end
 
         private def print_comment(comment)
-          with_color.light_blue.surround(@output) do
+          Colorize.with.light_blue.surround(@output) do
             @output << "#{"  " * @indent}<!-- #{comment.strip} -->\n"
           end
         end

@@ -148,7 +148,7 @@ You don't need this if you installed via Homebrew (it's automatic).
 
 ## Development
 
-You'll need [Crystal 0.31](https://crystal-lang.org/install/) installed (it might work with older
+You'll need [Crystal 0.33](https://crystal-lang.org/install/) installed (it might work with older
 or newer versions, but that's the one that's tested).
 
 After checking out the repo (or decompressing the tarball with the source code), run `shards` to get

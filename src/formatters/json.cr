@@ -15,7 +15,7 @@ module Crul
         end
       end
 
-      # taken almost verbatim from https://github.com/crystal-lang/crystal/blob/c551b35cb170893ad5454db0122dc28789d40bef/samples/pretty_json.cr
+      # taken almost verbatim from https://github.com/crystal-lang/crystal/blob/257eaa23b40bb4abef2f82029697c2785b9cb588/samples/pretty_json.cr
       # needed changes:
       #  * @input is IO | String instead of IO
       #  * JSON constant needs to be “rooted” (::JSON)
@@ -31,32 +31,34 @@ module Crul
 
         def read_any
           case @pull.kind
-          when :null
-            with_color.bold.surround(@output) do
+          when .null?
+            Colorize.with.bold.surround(@output) do
               @pull.read_null.to_json(@output)
             end
-          when :bool
-            with_color.light_blue.surround(@output) do
+          when .bool?
+            Colorize.with.light_blue.surround(@output) do
               @pull.read_bool.to_json(@output)
             end
-          when :int
-            with_color.red.surround(@output) do
+          when .int?
+            Colorize.with.red.surround(@output) do
               @pull.read_int.to_json(@output)
             end
-          when :float
-            with_color.red.surround(@output) do
+          when .float?
+            Colorize.with.red.surround(@output) do
               @pull.read_float.to_json(@output)
             end
-          when :string
-            with_color.yellow.surround(@output) do
+          when .string?
+            Colorize.with.yellow.surround(@output) do
               @pull.read_string.to_json(@output)
             end
-          when :begin_array
+          when .begin_array?
             read_array
-          when :begin_object
+          when .begin_object?
             read_object
-          when :EOF
+          when .eof?
             # We are done
+          else
+            raise "Bug: unexpected kind: #{@pull.kind}"
           end
         end
 
@@ -89,7 +91,7 @@ module Crul
               print '\n' if @indent > 0
             end
             print_indent
-            with_color.cyan.surround(@output) do
+            Colorize.with.cyan.surround(@output) do
               key.to_json(@output)
             end
             print ": "
